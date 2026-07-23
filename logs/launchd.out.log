@@ -1,0 +1,177 @@
+ARBITER BIOLOGY FIELD · http://127.0.0.1:8799 · 9,298 objects · embed http://127.0.0.1:8000/v1/embed
+19:55:27 "GET /field/v1/health HTTP/1.1" 200 -
+19:55:27 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:55:55 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:56:06 "GET / HTTP/1.1" 200 -
+19:56:06 "GET /favicon.ico HTTP/1.1" 404 -
+19:56:08 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:56:11 "GET / HTTP/1.1" 200 -
+19:56:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:56:28 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:56:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:57:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:57:19 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:57:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:58:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:58:31 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:58:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:59:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:59:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+19:59:59 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:00:28 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:00:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:01:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:01:19 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:01:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:02:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:02:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:03:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:03:59 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:04:42 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:05:27 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:05:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:06:42 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:06:44 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:07:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:08:03 "GET /field/v1/manifest HTTP/1.1" 200 -
+ARBITER BIOLOGY FIELD · http://127.0.0.1:8799 · 9,298 objects · embed http://127.0.0.1:8000/v1/embed
+20:08:13 "GET /field/v1/health HTTP/1.1" 200 -
+20:08:13 "GET /field/v1/health HTTP/1.1" 200 -
+20:08:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:09:20 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:09:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:09:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:10:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:10:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:10:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:11:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:12:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:13:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:14:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:15:42 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:16:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:17:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:17:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:18:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:18:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:19:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:20:16 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:20:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:20:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:21:09 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:21:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:21:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:22:10 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:22:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:22:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:23:09 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:23:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:23:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:24:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:24:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:24:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:25:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:25:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:25:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:26:01 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:26:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:26:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:27:41 "GET /field/v1/manifest HTTP/1.1" 200 -20:27:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+
+20:28:4120:28:41  "GET /field/v1/manifest HTTP/1.1" 200 -
+"GET /field/v1/manifest HTTP/1.1" 200 -
+20:29:41 "GET /field/v1/manifest HTTP/1.1" 200 -20:29:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+
+20:30:41 "GET /field/v1/manifest HTTP/1.1" 200 -20:30:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+
+20:31:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:31:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:32:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:32:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:33:41 20:33:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+"GET /field/v1/manifest HTTP/1.1" 200 -
+20:34:4120:34:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+20:35:4120:35:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+20:36:4120:36:41  "GET /field/v1/manifest HTTP/1.1" 200 -"GET /field/v1/manifest HTTP/1.1" 200 -
+
+20:37:4120:37:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+20:38:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:38:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:39:01 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:39:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+ARBITER BIOLOGY FIELD · http://127.0.0.1:8799 · 9,298 objects · embed http://127.0.0.1:8000/v1/embed
+20:39:26 "GET /field/v1/health HTTP/1.1" 200 -
+20:39:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:39:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:40:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:40:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:40:30 "GET / HTTP/1.1" 200 -
+20:40:3020:40:3020:40:30 "GET /assets/hero-01-coast.jpg HTTP/1.1" 200 - "GET /field/v1/manifest HTTP/1.1" 200 -
+
+ "GET /assets/hero-03-researchers.jpg HTTP/1.1" 200 -
+20:40:3020:40:30  "GET /assets/hero-04-figure.jpg HTTP/1.1" 200 -
+"GET /assets/hero-02-coast-group.jpg HTTP/1.1" 200 -
+20:40:4120:40:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+20:41:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:41:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:41:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:41:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:42:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:42:06 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:42:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:42:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:43:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:43:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:43:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:44:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:44:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:44:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:45:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:45:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:45:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:46:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:46:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:46:42 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:47:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:47:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:47:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:48:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:48:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:48:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:49:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:49:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:49:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:50:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:50:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:50:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:50:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:51:00 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:51:30 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:51:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:52:01 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:52:34 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:52:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:53:11 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:53:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:54:20 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:54:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:55:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:55:59 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:56:41 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:57:19 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:58:40 "GET /field/v1/manifest HTTP/1.1" 200 -
+20:59:59 "GET /field/v1/manifest HTTP/1.1" 200 -
+21:01:19 "GET /field/v1/manifest HTTP/1.1" 200 -
+21:02:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+21:03:59 "GET /field/v1/manifest HTTP/1.1" 200 -
+21:05:19 "GET /field/v1/manifest HTTP/1.1" 200 -
+21:06:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+21:08:07 "GET /field/v1/manifest HTTP/1.1" 200 -
+ARBITER BIOLOGY FIELD · http://127.0.0.1:8799 · 9,298 objects · embed http://127.0.0.1:8000/v1/embed
+21:08:28 "GET /field/v1/health HTTP/1.1" 200 -
+21:09:46 "GET / HTTP/1.1" 200 -
+21:09:47 "GET /field/v1/manifest HTTP/1.1" 200 -

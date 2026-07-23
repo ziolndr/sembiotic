@@ -1,6 +1,8 @@
 # Sembiotic
 
-**The biological meaning platform. Runs on ARBITER.**
+Biological meaning, measured. A field-backed biological search platform running on ARBITER (26MB, 72D frozen geometry). The production landing page rotates real, licensed microscopy images and sends queries to the same-origin local field API.
+
+**The biological meaning platform. Powered by ARBITER.**
 
 Sembiotic encodes biological objects once into a persistent 72-dimensional field, embeds only the incoming query, and ranks the complete field by deterministic coherence.
 
