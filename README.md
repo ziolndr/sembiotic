@@ -1,6 +1,6 @@
 # Sembiotic
 
-**The biological meaning platform. Runs on ARBITER.**
+**The biological meaning platform. Powered by ARBITER.**
 
 Sembiotic encodes biological objects once into a persistent 72-dimensional field, embeds only the incoming query, and ranks the complete field by deterministic coherence.
 

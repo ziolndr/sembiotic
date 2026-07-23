@@ -345,3 +345,5 @@ SEMBIOTIC FIELD · http://127.0.0.1:8799 · 9,298 objects · source-record media
 23:29:30 "GET /field/v1/manifest HTTP/1.1" 200 -
 23:29:31 "GET / HTTP/1.1" 200 -
 23:29:31 "GET /field/v1/manifest HTTP/1.1" 200 -
+ARBITER BIOLOGY FIELD · http://127.0.0.1:8799 · 9,298 objects · embed http://127.0.0.1:8000/v1/embed
+23:30:22 "GET /field/v1/health HTTP/1.1" 200 -

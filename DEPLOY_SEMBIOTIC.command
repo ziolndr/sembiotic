@@ -20,7 +20,7 @@ required=[
   "'Instrument Sans'", "'Fragment Mono'",
   'id="queryForm"', 'id="resultLayer"', 'id="fieldCanvas"',
   'id="modes"', 'Choose the layer of biology that matters.',
-  'Runs on <b>ARBITER</b>',
+  'Powered by <b>ARBITER</b>',
   "const FIELD_BASE=window.ARBITER_BIOLOGY_FIELD_URL||window.location.origin;"
 ]
 missing=[x for x in required if x not in s]
@@ -62,7 +62,7 @@ git pull --rebase --autostash origin main 2>/dev/null || true
 
 git add -A
 if ! git diff --cached --quiet; then
-  git commit -m "Refine Sembiotic brand system"
+  git commit -m "Redesign Sembiotic as biological field platform"
 else
   print "Git working tree already current."
 fi
