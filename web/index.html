@@ -44,6 +44,390 @@ body{font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
 @media(max-width:1100px){.app{grid-template-rows:76px minmax(0,1fr) 245px 28px;padding:0 24px 10px}.top{grid-template-columns:210px 1fr 126px;gap:18px}.brand button{font-size:25px}.stage{grid-template-columns:minmax(330px,500px) 1fr;gap:22px;padding:24px 0 18px}.title{font-size:58px}.description{font-size:11px}.tile{flex-basis:154px}.rail-arrow.left{left:-22px}}
 @media(max-width:760px){body{overflow:auto}.app{height:auto;min-height:100svh;grid-template-rows:auto auto auto 32px;padding:0 14px 10px;overflow:visible}.top{grid-template-columns:1fr 92px;grid-template-rows:50px 68px;gap:0}.brand button{font-size:22px}.query-form{grid-column:1/3}.query-form input{font-size:23px}.nav-count{grid-column:2;grid-row:1}.nav-count span{display:none}.stage{display:flex;flex-direction:column;padding:24px 0 18px;overflow:visible}.copy{order:1;padding:0}.media-panel{order:2;height:42vh;min-height:280px;margin-top:22px}.title{font-size:clamp(48px,15vw,68px);max-width:9ch}.description{-webkit-line-clamp:4}.actions .action:nth-child(n+4){display:none}.field{height:255px}.field-sort{display:none}.bucket{padding:0 13px}.tile{flex-basis:132px}.rail-arrow{display:none}.footer-right,.footer-left span:nth-child(n+3){display:none}}
 </style>
+
+
+
+<!-- SEMBIOTIC_LAYOUT_REFINEMENT_V1_STYLE -->
+<style id="sembiotic-layout-refinement-v1">
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+}
+
+body.sembiotic-layout-refined {
+  min-width: 0 !important;
+  overscroll-behavior-x: none;
+}
+
+body.sembiotic-layout-refined *,
+body.sembiotic-layout-refined *::before,
+body.sembiotic-layout-refined *::after {
+  box-sizing: border-box;
+}
+
+.sembiotic-minzero,
+.sembiotic-minzero > * {
+  min-width: 0 !important;
+}
+
+.sembiotic-header-row {
+  width: 100% !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.sembiotic-header-row > * {
+  min-width: 0 !important;
+}
+
+.sembiotic-query-shell {
+  flex: 1 1 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+.sembiotic-query-control {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  line-height: 1.24 !important;
+  font-size: clamp(16px, 1.55vw, 27px) !important;
+  resize: none !important;
+}
+
+input.sembiotic-query-control {
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.sembiotic-query-display {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  overflow-wrap: normal !important;
+}
+
+.sembiotic-record-hero {
+  display: grid !important;
+  grid-template-columns:
+    minmax(270px, 38%)
+    minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.sembiotic-hero-copy-branch {
+  grid-column: 1 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  align-self: stretch !important;
+}
+
+.sembiotic-hero-media-branch {
+  grid-column: 2 !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  align-self: stretch !important;
+}
+
+.sembiotic-hero-title {
+  max-width: 11.5ch !important;
+  margin-top: 0 !important;
+  margin-bottom: 20px !important;
+  font-size: clamp(46px, 5.15vw, 88px) !important;
+  line-height: .91 !important;
+  letter-spacing: -.045em !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  text-wrap: balance;
+}
+
+.sembiotic-hero-media-frame {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: clamp(300px, 45vh, 540px) !important;
+  min-height: 300px !important;
+  max-height: 540px !important;
+  overflow: hidden !important;
+  background: #080b0a !important;
+}
+
+img.sembiotic-hero-media,
+video.sembiotic-hero-media {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  transform: none !important;
+  scale: 1 !important;
+  filter: none !important;
+  image-rendering: auto !important;
+}
+
+.sembiotic-hero-media:not(img):not(video) {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  background-size: contain !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+.sembiotic-tabs-row {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 20 !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sembiotic-tabs-row::-webkit-scrollbar,
+.sembiotic-results-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.sembiotic-tabs-row > * {
+  flex: 0 0 auto !important;
+  min-height: 46px !important;
+}
+
+.sembiotic-results-rail {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 10 !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sembiotic-result-card {
+  flex: 0 0 clamp(218px, 15vw, 286px) !important;
+  width: clamp(218px, 15vw, 286px) !important;
+  min-width: clamp(218px, 15vw, 286px) !important;
+  max-width: 286px !important;
+  scroll-snap-align: start;
+  overflow: hidden !important;
+}
+
+.sembiotic-result-card img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.sembiotic-status-row {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 10 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 1080px) {
+  .sembiotic-record-hero {
+    grid-template-columns:
+      minmax(250px, 42%)
+      minmax(0, 1fr) !important;
+  }
+
+  .sembiotic-hero-title {
+    font-size: clamp(43px, 6vw, 72px) !important;
+  }
+
+  .sembiotic-hero-media-frame {
+    height: clamp(290px, 40vh, 470px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body.sembiotic-layout-refined {
+    overflow-y: auto !important;
+  }
+
+  .sembiotic-header-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px 14px !important;
+    gap: 10px 14px !important;
+  }
+
+  .sembiotic-header-row .sembiotic-query-shell {
+    order: 50 !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .sembiotic-query-control {
+    min-height: 48px !important;
+    max-height: 88px !important;
+    padding: 11px 12px !important;
+    font-size: 16px !important;
+    line-height: 1.3 !important;
+    border-radius: 0 !important;
+  }
+
+  .sembiotic-query-display {
+    max-width: calc(100vw - 28px) !important;
+    font-size: clamp(16px, 5vw, 22px) !important;
+  }
+
+  .sembiotic-record-hero {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .sembiotic-hero-copy-branch {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    padding: 22px 16px 18px !important;
+    overflow: visible !important;
+  }
+
+  .sembiotic-hero-media-branch {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+  }
+
+  .sembiotic-hero-title {
+    max-width: 10.5ch !important;
+    margin-bottom: 14px !important;
+    font-size: clamp(42px, 14vw, 64px) !important;
+    line-height: .9 !important;
+  }
+
+  .sembiotic-hero-media-frame {
+    width: 100% !important;
+    height: 36svh !important;
+    min-height: 250px !important;
+    max-height: 370px !important;
+  }
+
+  .sembiotic-tabs-row {
+    min-height: 48px !important;
+    padding: 0 !important;
+    scroll-snap-type: x proximity;
+  }
+
+  .sembiotic-tabs-row > * {
+    min-height: 48px !important;
+    padding-inline: 17px !important;
+    scroll-snap-align: start;
+  }
+
+  .sembiotic-results-rail {
+    padding: 10px 12px 14px !important;
+    gap: 9px !important;
+    scroll-snap-type: x mandatory;
+  }
+
+  .sembiotic-result-card {
+    flex: 0 0 min(82vw, 320px) !important;
+    width: min(82vw, 320px) !important;
+    min-width: min(82vw, 320px) !important;
+    max-width: 320px !important;
+    scroll-snap-align: center;
+  }
+
+  .sembiotic-status-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 7px 16px !important;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important;
+    font-size: 9px !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .sembiotic-header-row {
+    padding-inline: 12px !important;
+  }
+
+  .sembiotic-hero-copy-branch {
+    padding-inline: 13px !important;
+  }
+
+  .sembiotic-hero-title {
+    font-size: clamp(39px, 13vw, 55px) !important;
+  }
+
+  .sembiotic-hero-media-frame {
+    min-height: 225px !important;
+    height: 32svh !important;
+  }
+
+  .sembiotic-result-card {
+    flex-basis: 86vw !important;
+    width: 86vw !important;
+    min-width: 86vw !important;
+  }
+}
+
+</style>
+<!-- /SEMBIOTIC_LAYOUT_REFINEMENT_V1_STYLE -->
 </head>
 <body>
 <main class="app">
@@ -172,5 +556,656 @@ $('export').onclick=()=>{const p=currentPayload();if(!p)return toast('Run a fiel
 document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&document.activeElement!==$('query'))step(-1);if(e.key==='ArrowRight'&&document.activeElement!==$('query'))step(1);if(e.key==='/'&&document.activeElement!==$('query')){e.preventDefault();$('query').focus()}if((e.metaKey||e.ctrlKey)&&e.key==='Enter')search()});
 renderBuckets();clearMedia();loadMedia();loadSystem();setInterval(loadSystem,30000);$('query').focus();
 </script>
+
+
+
+<!-- SEMBIOTIC_LAYOUT_REFINEMENT_V1_SCRIPT -->
+<script id="sembiotic-layout-refinement-runtime-v1">
+
+(() => {
+  const state = {
+    scheduled: false,
+    observer: null
+  };
+
+  const all = (selector, root = document) =>
+    Array.from(root.querySelectorAll(selector));
+
+  const visible = element => {
+    if (!(element instanceof Element)) return false;
+
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+
+    return (
+      style.display !== 'none' &&
+      style.visibility !== 'hidden' &&
+      Number(style.opacity || 1) > 0 &&
+      rect.width > 0 &&
+      rect.height > 0
+    );
+  };
+
+  const area = element => {
+    const rect = element.getBoundingClientRect();
+    return rect.width * rect.height;
+  };
+
+  const ancestors = element => {
+    const rows = [];
+    let current = element;
+
+    while (
+      current &&
+      current !== document.documentElement
+    ) {
+      rows.push(current);
+      current = current.parentElement;
+    }
+
+    return rows;
+  };
+
+  const directBranch = (ancestor, element) => {
+    let current = element;
+
+    while (
+      current &&
+      current.parentElement !== ancestor
+    ) {
+      current = current.parentElement;
+    }
+
+    return current;
+  };
+
+  const findCommonContainer = (first, second) => {
+    if (!first || !second) return null;
+
+    let current = first.parentElement;
+    let depth = 0;
+
+    while (
+      current &&
+      current !== document.body &&
+      depth < 8
+    ) {
+      if (current.contains(second)) {
+        const firstBranch =
+          directBranch(current, first);
+
+        const secondBranch =
+          directBranch(current, second);
+
+        if (
+          firstBranch &&
+          secondBranch &&
+          firstBranch !== secondBranch &&
+          current.children.length <= 5
+        ) {
+          return {
+            container: current,
+            firstBranch,
+            secondBranch
+          };
+        }
+      }
+
+      current = current.parentElement;
+      depth += 1;
+    }
+
+    return null;
+  };
+
+  const chooseQueryControl = () => {
+    const explicit = [
+      '#query',
+      '#queryInput',
+      '#searchInput',
+      '#fieldQuery',
+      '#prompt',
+      'textarea[aria-label*="query" i]',
+      'input[aria-label*="query" i]',
+      'textarea[placeholder*="describe" i]',
+      'input[placeholder*="describe" i]',
+      'textarea[placeholder*="search" i]',
+      'input[placeholder*="search" i]',
+      '[contenteditable="true"][role="textbox"]'
+    ];
+
+    for (const selector of explicit) {
+      const found = document.querySelector(selector);
+
+      if (found && visible(found)) {
+        return found;
+      }
+    }
+
+    const candidates = all(
+      'textarea,input[type="search"],input[type="text"],[contenteditable="true"]'
+    ).filter(visible);
+
+    candidates.sort((left, right) => {
+      const leftRect = left.getBoundingClientRect();
+      const rightRect = right.getBoundingClientRect();
+
+      const leftScore =
+        Math.max(0, 220 - leftRect.top) +
+        leftRect.width;
+
+      const rightScore =
+        Math.max(0, 220 - rightRect.top) +
+        rightRect.width;
+
+      return rightScore - leftScore;
+    });
+
+    return candidates[0] || null;
+  };
+
+  const chooseHeroTitle = () => {
+    const candidates = all(
+      'h1,h2,[class*="hero-title"],[class*="record-title"],[class~="title"]'
+    ).filter(element => {
+      if (!visible(element)) return false;
+
+      if (
+        element.closest(
+          '.sembiotic-results-rail,.sembiotic-result-card'
+        )
+      ) {
+        return false;
+      }
+
+      const text =
+        (element.textContent || '').trim();
+
+      if (text.length < 12) return false;
+
+      const rect =
+        element.getBoundingClientRect();
+
+      return (
+        rect.top < window.innerHeight * .72 &&
+        rect.width > 180
+      );
+    });
+
+    candidates.sort((left, right) => {
+      const leftSize =
+        parseFloat(getComputedStyle(left).fontSize) || 0;
+
+      const rightSize =
+        parseFloat(getComputedStyle(right).fontSize) || 0;
+
+      return (
+        rightSize * Math.sqrt(area(right)) -
+        leftSize * Math.sqrt(area(left))
+      );
+    });
+
+    return candidates[0] || null;
+  };
+
+  const chooseHeroMedia = () => {
+    const images = all('img,video').filter(element => {
+      if (!visible(element)) return false;
+
+      if (
+        element.closest(
+          '.sembiotic-results-rail,.sembiotic-result-card,[class*="card"],[class*="rail"]'
+        )
+      ) {
+        return false;
+      }
+
+      const rect =
+        element.getBoundingClientRect();
+
+      return (
+        rect.width > 380 &&
+        rect.height > 180 &&
+        rect.top < window.innerHeight * .8
+      );
+    });
+
+    images.sort(
+      (left, right) =>
+        area(right) - area(left)
+    );
+
+    if (images.length) {
+      return images[0];
+    }
+
+    const backgrounds = all(
+      'div,section,figure'
+    ).filter(element => {
+      if (!visible(element)) return false;
+
+      if (
+        element.closest(
+          '.sembiotic-results-rail,.sembiotic-result-card,[class*="card"],[class*="rail"]'
+        )
+      ) {
+        return false;
+      }
+
+      const style =
+        getComputedStyle(element);
+
+      if (
+        !style.backgroundImage ||
+        style.backgroundImage === 'none'
+      ) {
+        return false;
+      }
+
+      const rect =
+        element.getBoundingClientRect();
+
+      return (
+        rect.width > 380 &&
+        rect.height > 180 &&
+        rect.top < window.innerHeight * .8
+      );
+    });
+
+    backgrounds.sort(
+      (left, right) =>
+        area(right) - area(left)
+    );
+
+    return backgrounds[0] || null;
+  };
+
+  const chooseTabs = () => {
+    const candidates = all(
+      'nav,section,div,ul'
+    ).filter(element => {
+      if (!visible(element)) return false;
+
+      const rect =
+        element.getBoundingClientRect();
+
+      if (
+        rect.height < 32 ||
+        rect.height > 135
+      ) {
+        return false;
+      }
+
+      const text =
+        (element.innerText || '')
+          .toUpperCase()
+          .replace(/\s+/g, ' ');
+
+      return (
+        text.includes('ALL') &&
+        text.includes('CELLS') &&
+        text.includes('PATHWAYS') &&
+        text.includes('ASSAYS') &&
+        text.includes('PAPERS')
+      );
+    });
+
+    candidates.sort(
+      (left, right) =>
+        area(left) - area(right)
+    );
+
+    return candidates[0] || null;
+  };
+
+  const chooseCardsAndRail = heroMedia => {
+    const cardCandidates = [];
+
+    for (const image of all('img').filter(visible)) {
+      if (image === heroMedia) continue;
+
+      const rect =
+        image.getBoundingClientRect();
+
+      if (
+        rect.width < 110 ||
+        rect.width > 420 ||
+        rect.height < 60 ||
+        rect.height > 320
+      ) {
+        continue;
+      }
+
+      const card = image.closest(
+        'article,li,button,[class*="card"],[class*="result"],[class*="item"]'
+      );
+
+      if (
+        card &&
+        visible(card) &&
+        !cardCandidates.includes(card)
+      ) {
+        cardCandidates.push(card);
+      }
+    }
+
+    if (cardCandidates.length < 3) {
+      return {
+        cards: cardCandidates,
+        rail: null
+      };
+    }
+
+    let rail =
+      cardCandidates[0].parentElement;
+
+    while (
+      rail &&
+      rail !== document.body
+    ) {
+      const contained = cardCandidates.filter(
+        card => rail.contains(card)
+      );
+
+      if (
+        contained.length >=
+        Math.min(5, cardCandidates.length)
+      ) {
+        break;
+      }
+
+      rail = rail.parentElement;
+    }
+
+    if (
+      !rail ||
+      rail === document.body
+    ) {
+      rail = null;
+    }
+
+    return {
+      cards: cardCandidates,
+      rail
+    };
+  };
+
+  const chooseStatusRow = () => {
+    const candidates = all(
+      'footer,div,nav,section'
+    ).filter(element => {
+      if (!visible(element)) return false;
+
+      const text =
+        (element.innerText || '')
+          .toUpperCase()
+          .replace(/\s+/g, ' ');
+
+      return (
+        text.includes('ARBITER STATUS') &&
+        text.includes('INDEX') &&
+        text.includes('LAST QUERY')
+      );
+    });
+
+    candidates.sort(
+      (left, right) =>
+        area(left) - area(right)
+    );
+
+    return candidates[0] || null;
+  };
+
+  const annotate = () => {
+    document.body?.classList.add(
+      'sembiotic-layout-refined'
+    );
+
+    const query =
+      chooseQueryControl();
+
+    if (query) {
+      query.classList.add(
+        'sembiotic-query-control',
+        'sembiotic-minzero'
+      );
+
+      query.removeAttribute('size');
+
+      const shell =
+        query.closest(
+          'form,[class*="search"],[class*="query"]'
+        ) ||
+        query.parentElement;
+
+      shell?.classList.add(
+        'sembiotic-query-shell',
+        'sembiotic-minzero'
+      );
+
+      let current = query.parentElement;
+      let header = null;
+
+      while (
+        current &&
+        current !== document.body
+      ) {
+        current.classList.add(
+          'sembiotic-minzero'
+        );
+
+        const rect =
+          current.getBoundingClientRect();
+
+        if (
+          current.matches(
+            'header,nav,[role="banner"]'
+          ) ||
+          (
+            rect.top <= 110 &&
+            rect.width >=
+              window.innerWidth * .7
+          )
+        ) {
+          header = current;
+          break;
+        }
+
+        current = current.parentElement;
+      }
+
+      header?.classList.add(
+        'sembiotic-header-row'
+      );
+
+      if (
+        query.tagName === 'TEXTAREA' &&
+        query.dataset.sembioticHeight !== '1'
+      ) {
+        query.dataset.sembioticHeight = '1';
+
+        const resize = () => {
+          query.style.height = 'auto';
+
+          query.style.height =
+            Math.min(
+              96,
+              Math.max(
+                48,
+                query.scrollHeight
+              )
+            ) + 'px';
+        };
+
+        query.addEventListener(
+          'input',
+          resize,
+          {passive: true}
+        );
+
+        resize();
+      }
+
+      if (header) {
+        for (
+          const element of
+          all('div,span,p', header)
+        ) {
+          if (
+            element.contains(query)
+          ) {
+            continue;
+          }
+
+          const text =
+            (element.textContent || '')
+              .trim();
+
+          const rect =
+            element.getBoundingClientRect();
+
+          if (
+            text.length > 80 &&
+            rect.height < 100
+          ) {
+            element.classList.add(
+              'sembiotic-query-display',
+              'sembiotic-minzero'
+            );
+          }
+        }
+      }
+    }
+
+    const heroTitle =
+      chooseHeroTitle();
+
+    const heroMedia =
+      chooseHeroMedia();
+
+    heroTitle?.classList.add(
+      'sembiotic-hero-title'
+    );
+
+    if (heroMedia) {
+      heroMedia.classList.add(
+        'sembiotic-hero-media'
+      );
+
+      heroMedia.parentElement?.classList.add(
+        'sembiotic-hero-media-frame',
+        'sembiotic-minzero'
+      );
+    }
+
+    const common =
+      findCommonContainer(
+        heroTitle,
+        heroMedia
+      );
+
+    if (common) {
+      common.container.classList.add(
+        'sembiotic-record-hero'
+      );
+
+      common.firstBranch.classList.add(
+        'sembiotic-hero-copy-branch',
+        'sembiotic-minzero'
+      );
+
+      common.secondBranch.classList.add(
+        'sembiotic-hero-media-branch',
+        'sembiotic-minzero'
+      );
+    }
+
+    const tabs =
+      chooseTabs();
+
+    tabs?.classList.add(
+      'sembiotic-tabs-row',
+      'sembiotic-minzero'
+    );
+
+    const railState =
+      chooseCardsAndRail(heroMedia);
+
+    railState.rail?.classList.add(
+      'sembiotic-results-rail',
+      'sembiotic-minzero'
+    );
+
+    for (
+      const card of
+      railState.cards
+    ) {
+      card.classList.add(
+        'sembiotic-result-card',
+        'sembiotic-minzero'
+      );
+    }
+
+    const status =
+      chooseStatusRow();
+
+    status?.classList.add(
+      'sembiotic-status-row',
+      'sembiotic-minzero'
+    );
+  };
+
+  const schedule = () => {
+    if (state.scheduled) return;
+
+    state.scheduled = true;
+
+    requestAnimationFrame(() => {
+      state.scheduled = false;
+      annotate();
+    });
+  };
+
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      schedule,
+      {once: true}
+    );
+  } else {
+    schedule();
+  }
+
+  window.addEventListener(
+    'resize',
+    schedule,
+    {passive: true}
+  );
+
+  window.addEventListener(
+    'load',
+    schedule,
+    {once: true}
+  );
+
+  state.observer =
+    new MutationObserver(schedule);
+
+  state.observer.observe(
+    document.documentElement,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
+
+  setTimeout(schedule, 400);
+  setTimeout(schedule, 1200);
+})();
+
+</script>
+<!-- /SEMBIOTIC_LAYOUT_REFINEMENT_V1_SCRIPT -->
 </body>
 </html>
