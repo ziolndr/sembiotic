@@ -1,6 +1,24 @@
 #!/bin/zsh
 set -euo pipefail
-ROOT="${0:A:h}";PYTHON="${ARBITER_PYTHON:-$(command -v python3)}";PORT="${ARBITER_BIOLOGY_PORT:-8799}";EMBED_URL="${ARBITER_EMBED_URL:-http://127.0.0.1:8000/v1/embed}"
+ROOT="${0:A:h}"
+PYTHON="${ARBITER_PYTHON:-}"
+if [[ -n "$PYTHON" ]] && ! "$PYTHON" -c 'import numpy' >/dev/null 2>&1; then PYTHON=""; fi
+if [[ -z "$PYTHON" ]]; then
+  for candidate in \
+    "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3" \
+    "$ROOT/venv/bin/python3" \
+    "$ROOT/.venv/bin/python3" \
+    "$HOME/Downloads/venv/bin/python3" \
+    "$HOME/venv/bin/python3" \
+    "$(command -v python3 2>/dev/null || true)"
+  do
+    [[ -n "$candidate" && -x "$candidate" ]] || continue
+    if "$candidate" -c 'import numpy' >/dev/null 2>&1; then PYTHON="$candidate"; break; fi
+  done
+fi
+if [[ -z "$PYTHON" ]]; then echo "No NumPy-capable Python installation was found."; exit 1; fi
+export ARBITER_PYTHON="$PYTHON"
+PORT="${ARBITER_BIOLOGY_PORT:-8799}";EMBED_URL="${ARBITER_EMBED_URL:-http://127.0.0.1:8000/v1/embed}"
 PLIST="$HOME/Library/LaunchAgents/com.actualgeneralintelligence.arbiter.biology-field.plist"
 mkdir -p "$HOME/Library/LaunchAgents" "$ROOT/logs"
 cat > "$PLIST" <<EOF

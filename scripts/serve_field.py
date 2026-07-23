@@ -2,11 +2,9 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import mimetypes
 import os
-import re
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -17,41 +15,20 @@ import numpy as np
 
 from embed_client import embed_texts
 
-TOKEN_RE = re.compile(r"[a-z0-9βγδκ]+")
-
-
-def tokens(value: object) -> set[str]:
-    return set(TOKEN_RE.findall(str(value or "").lower()))
-
 
 class MediaResolver:
-    """Attach real, licensed scientific imagery to ranked field objects.
+    """Expose only imagery already attached to the ranked source record.
 
-    Explicit record imagery always wins. Objects without imagery are mapped to a small,
-    credited microscopy library using their title, text, category, domain, and tags.
-    The resolver does not fabricate images or infer scientific measurements from them.
+    No generic microscopy library, generated image, or keyword-matched fallback is
+    introduced. A result without source media remains image-free in the interface.
     """
 
     def __init__(self, catalog_path: Path):
         self.catalog_path = catalog_path
         self.catalog: list[dict] = []
-        self.reload()
 
     def reload(self) -> None:
-        if not self.catalog_path.exists():
-            self.catalog = []
-            return
-        data = json.loads(self.catalog_path.read_text(encoding="utf-8"))
-        if not isinstance(data, list):
-            raise RuntimeError("media catalog must be a JSON array")
-        rows = []
-        for row in data:
-            if not isinstance(row, dict) or not row.get("url"):
-                continue
-            row = dict(row)
-            row["_keywords"] = [str(x).lower().strip() for x in row.get("keywords", []) if str(x).strip()]
-            rows.append(row)
-        self.catalog = rows
+        self.catalog = []
 
     @staticmethod
     def _explicit_media(obj: dict) -> list[dict]:
@@ -77,68 +54,36 @@ class MediaResolver:
             out.append(
                 {
                     "url": url,
-                    "page": str(meta.get("page") or obj.get("source_url") or ""),
+                    "page": str(meta.get("page") or md.get("image_page") or obj.get("source_url") or ""),
                     "credit": str(meta.get("credit") or md.get("image_credit") or obj.get("source") or "Source record"),
                     "license": str(meta.get("license") or md.get("image_license") or "Source record terms"),
-                    "label": str(meta.get("label") or obj.get("title") or obj.get("name") or "Record image"),
+                    "label": str(meta.get("label") or md.get("image_label") or obj.get("title") or obj.get("name") or "Record image"),
                     "source": "record",
                 }
             )
         return out
 
-    def _catalog_matches(self, obj: dict) -> list[dict]:
-        if not self.catalog:
-            return []
-        tag_text = " ".join(str(x) for x in obj.get("tags", []) if x)
-        haystack = " ".join(
-            str(obj.get(k) or "")
-            for k in ("title", "name", "text", "description", "category", "object_type", "domain", "mode", "source")
-        ) + " " + tag_text
-        hay = haystack.lower()
-        hay_tokens = tokens(hay)
-        object_key = str(obj.get("id") or obj.get("code") or obj.get("title") or "")
-        tie_seed = int(hashlib.sha1(object_key.encode("utf-8", "ignore")).hexdigest()[:10], 16)
-        scored: list[tuple[float, int, dict]] = []
-        for idx, media in enumerate(self.catalog):
-            score = 0.0
-            for keyword in media.get("_keywords", []):
-                if not keyword:
-                    continue
-                if " " in keyword:
-                    if keyword in hay:
-                        score += 5.0 + min(2.0, len(keyword) / 20)
-                elif keyword in hay_tokens:
-                    score += 2.0
-                elif keyword in hay:
-                    score += 0.5
-            scored.append((score, (idx - tie_seed) % max(1, len(self.catalog)), media))
-        scored.sort(key=lambda x: (-x[0], x[1]))
-        # Always return several candidates so the browser can recover from remote failures.
-        return [dict(row, source="curated real microscopy library") for _, _, row in scored[:5]]
-
     def hydrate(self, obj: dict) -> dict:
         out = dict(obj)
-        explicit = self._explicit_media(out)
-        matched = self._catalog_matches(out)
-        candidates = explicit + [m for m in matched if m.get("url") not in {x.get("url") for x in explicit}]
+        candidates = self._explicit_media(out)
+        out["canonical_record_url"] = str(out.get("source_url") or out.get("url") or "")
         if not candidates:
+            out.pop("image_url", None)
+            out["image_candidates"] = []
+            out["image_source"] = "none"
             return out
         primary = candidates[0]
         out["image_url"] = primary.get("url", "")
         out["image_candidates"] = [x.get("url", "") for x in candidates if x.get("url")]
-        out["image_source"] = primary.get("source", "record")
+        out["image_source"] = "record"
         out["image_credit"] = primary.get("credit", "")
         out["image_license"] = primary.get("license", "")
         out["image_page"] = primary.get("page", "")
         out["image_label"] = primary.get("label", "")
-        out["canonical_record_url"] = str(out.get("source_url") or out.get("url") or "")
         return out
 
     def public_manifest(self) -> list[dict]:
-        return [
-            {k: v for k, v in row.items() if not k.startswith("_")}
-            for row in self.catalog
-        ]
+        return []
 
 
 class Field:
@@ -216,7 +161,7 @@ class Field:
             "dimension": int(self.manifest.get("dimension", 72)),
             "field_version": self.manifest.get("version"),
             "source": "LOCAL 72D FIELD",
-            "media_hydration": "record images, then credited real microscopy library",
+            "media_hydration": "source-record images only",
         }
 
 
@@ -252,10 +197,10 @@ class App(BaseHTTPRequestHandler):
             self.server.field.maybe_reload()
             return self.json(200, self.server.field.manifest)
         if path in ("/field/v1/media-manifest", "/media-manifest"):
-            return self.json(200, {"count": len(self.server.media.catalog), "media": self.server.media.public_manifest()})
+            return self.json(200, {"count": 0, "mode": "source-record-only", "media": []})
         if path in ("/field/v1/health", "/health"):
             f = self.server.field
-            return self.json(200, {"ok": f.vectors is not None, "count": len(f.objects), "embed_url": f.embed_url, "media": len(self.server.media.catalog)})
+            return self.json(200, {"ok": f.vectors is not None, "count": len(f.objects), "embed_url": f.embed_url, "media_mode": "source-record-only"})
         if path == "/field/v1/reload":
             try:
                 self.server.media.reload()
@@ -316,7 +261,7 @@ def main():
     server.media = media
     server.field = Field(Path(a.field), a.embed_url, media)
     server.public_dir = public_dir
-    print(f"SEMBIOTIC FIELD · http://{a.host}:{a.port} · {len(server.field.objects):,} objects · {len(media.catalog)} real media records · embed {a.embed_url}")
+    print(f"SEMBIOTIC FIELD · http://{a.host}:{a.port} · {len(server.field.objects):,} objects · source-record media only · embed {a.embed_url}")
     server.serve_forever()
 
 

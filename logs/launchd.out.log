@@ -283,3 +283,31 @@ SEMBIOTIC FIELD · http://127.0.0.1:8799 · 9,298 objects · 11 real media recor
  "GET /field/v1/manifest HTTP/1.1" 200 -
 22:52:33 22:52:33 "GET /field/v1/media-manifest HTTP/1.1" 200 -
 "GET /field/v1/manifest HTTP/1.1" 200 -
+SEMBIOTIC FIELD · http://127.0.0.1:8799 · 9,298 objects · 11 real media records · embed http://127.0.0.1:8000/v1/embed
+22:52:49 "GET /field/v1/health HTTP/1.1" 200 -
+22:52:49 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+22:52:50 "POST /field/v1/search HTTP/1.1" 200 -
+22:53:03 22:53:03"GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/media-manifest HTTP/1.1" 200 -
+22:53:3422:53:34 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+22:54:3922:54:39 "GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/media-manifest HTTP/1.1" 200 -
+22:56:0322:56:03 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+22:56:3622:56:36 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+22:57:55 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+22:57:55 "GET /field/v1/manifest HTTP/1.1" 200 -
+22:59:1622:59:16  "GET /field/v1/manifest HTTP/1.1" 200 -"GET /field/v1/media-manifest HTTP/1.1" 200 -
+
+23:00:35 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+23:00:35 "GET /field/v1/manifest HTTP/1.1" 200 -
+23:01:5623:01:56 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+23:03:16 23:03:16"GET /field/v1/manifest HTTP/1.1" 200 -
+ "GET /field/v1/media-manifest HTTP/1.1" 200 -
+23:04:3623:04:36 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+ "GET /field/v1/manifest HTTP/1.1" 200 -
+23:05:56 "GET /field/v1/media-manifest HTTP/1.1" 200 -
+23:05:56 "GET /field/v1/manifest HTTP/1.1" 200 -
