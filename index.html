@@ -172,5 +172,217 @@ $('export').onclick=()=>{const p=currentPayload();if(!p)return toast('Run a fiel
 document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&document.activeElement!==$('query'))step(-1);if(e.key==='ArrowRight'&&document.activeElement!==$('query'))step(1);if(e.key==='/'&&document.activeElement!==$('query')){e.preventDefault();$('query').focus()}if((e.metaKey||e.ctrlKey)&&e.key==='Enter')search()});
 renderBuckets();clearMedia();loadMedia();loadSystem();setInterval(loadSystem,30000);$('query').focus();
 </script>
+
+<!-- SEMBIOTIC_DESIGN_FIELD_V1 -->
+<style>
+#sembioticDesignControl{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid currentColor;
+  border-radius:999px;
+  background:transparent;
+  color:inherit;
+  padding:9px 14px;
+  font:500 12px/1 system-ui,sans-serif;
+  letter-spacing:.04em;
+  cursor:pointer;
+  opacity:.86;
+}
+#sembioticDesignControl:hover{opacity:1}
+#sembioticDesignControl[aria-pressed="true"]{
+  background:#eef2ec;
+  color:#101310;
+  border-color:#eef2ec;
+}
+#sembioticDesignStrip{
+  display:none;
+  width:min(900px,calc(100% - 32px));
+  margin:12px auto;
+  padding:12px 0;
+  border-top:1px solid rgba(130,150,136,.42);
+  border-bottom:1px solid rgba(130,150,136,.25);
+  font:11px/1.55 ui-monospace,monospace;
+  color:inherit;
+  opacity:.82;
+}
+#sembioticDesignStrip.open{display:block}
+#sembioticDesignStrip b{
+  font-family:system-ui,sans-serif;
+  font-size:13px;
+}
+</style>
+<script>
+(() => {
+  const sample =
+    "Rank candidate architectures for a minimal synthetic life form " +
+    "capable of maintaining a stable membrane, harvesting energy, " +
+    "regulating internal chemistry, storing and copying information, " +
+    "growing, dividing, and undergoing controlled evolution. Compare " +
+    "membrane compositions, metabolic networks, information systems, " +
+    "replication mechanisms, genetic circuits, division strategies, " +
+    "environmental requirements, failure modes, and containment systems.";
+
+  let designActive = false;
+  const originalFetch = window.fetch.bind(window);
+
+  function inputNode(){
+    return (
+      document.querySelector("#query") ||
+      document.querySelector("#searchInput") ||
+      document.querySelector("#queryInput") ||
+      document.querySelector("textarea") ||
+      document.querySelector('input[type="search"]')
+    );
+  }
+
+  window.fetch = async function(input, init){
+    const url =
+      typeof input === "string"
+        ? input
+        : String(input && input.url || "");
+
+    if(
+      designActive &&
+      url.includes("/field/v1/search") &&
+      init &&
+      typeof init.body === "string"
+    ){
+      try{
+        const body = JSON.parse(init.body);
+        body.mode = "design";
+        body.domain = "design";
+        body.design_field = true;
+
+        init = {
+          ...init,
+          body: JSON.stringify(body)
+        };
+      }catch(_){}
+    }
+
+    return originalFetch(input, init);
+  };
+
+  function install(){
+    if(
+      document.getElementById(
+        "sembioticDesignControl"
+      )
+    ){
+      return;
+    }
+
+    const input = inputNode();
+
+    if(!input){
+      return;
+    }
+
+    const modeNode =
+      document.querySelector('[data-mode="unified"]') ||
+      document.querySelector('[data-filter="unified"]');
+
+    const host =
+      (modeNode && modeNode.parentElement) ||
+      document.querySelector(".filters") ||
+      document.querySelector(".tabs") ||
+      document.querySelector(".filter-tabs") ||
+      document.querySelector(".bucket-tabs") ||
+      document.querySelector("nav") ||
+      input.closest("form") ||
+      input.parentElement;
+
+    const button = document.createElement("button");
+    button.id = "sembioticDesignControl";
+    button.type = "button";
+    button.textContent = "Design field";
+    button.setAttribute("aria-pressed","false");
+
+    const strip = document.createElement("div");
+    strip.id = "sembioticDesignStrip";
+
+    strip.innerHTML =
+      "<b>From biological discovery to biological design.</b> " +
+      "Generate → Embed → Rank → Build → Test → Iterate. " +
+      "Meaning selects the design. " +
+      "Experiment decides whether it lives.";
+
+    button.onclick = () => {
+      designActive = !designActive;
+
+      button.setAttribute(
+        "aria-pressed",
+        String(designActive)
+      );
+
+      strip.classList.toggle(
+        "open",
+        designActive
+      );
+
+      globalThis.SEMBIOTIC_MODE =
+        designActive
+          ? "design"
+          : "unified";
+
+      try{
+        if(typeof mode !== "undefined"){
+          mode = globalThis.SEMBIOTIC_MODE;
+        }
+      }catch(_){}
+
+      if(designActive){
+        input.value = sample;
+
+        input.dispatchEvent(
+          new Event(
+            "input",
+            {bubbles:true}
+          )
+        );
+
+        input.dispatchEvent(
+          new Event(
+            "change",
+            {bubbles:true}
+          )
+        );
+
+        input.focus();
+      }
+    };
+
+    host.appendChild(button);
+
+    const form =
+      input.closest("form") ||
+      input.parentElement;
+
+    form.insertAdjacentElement(
+      "afterend",
+      strip
+    );
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener(
+      "DOMContentLoaded",
+      install,
+      {once:true}
+    );
+  }else{
+    install();
+  }
+
+  new MutationObserver(install).observe(
+    document.documentElement,
+    {
+      childList:true,
+      subtree:true
+    }
+  );
+})();
+</script>
+
 </body>
 </html>
