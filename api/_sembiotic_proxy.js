@@ -74,32 +74,29 @@ async function proxyJson(
     return;
   }
 
-  let timer;
+  const controller =
+    new AbortController();
+
+  const timer = setTimeout(
+    () => controller.abort(),
+    timeoutMs
+  );
 
   try {
-    const origin = backendOrigin();
-    const incomingUrl = new URL(
+    const incoming = new URL(
       req.url,
       "https://sembiotic.invalid"
     );
 
     const upstreamUrl =
-      origin +
+      backendOrigin() +
       pathname +
-      incomingUrl.search;
-
-    const controller =
-      new AbortController();
-
-    timer = setTimeout(
-      () => controller.abort(),
-      timeoutMs
-    );
+      incoming.search;
 
     const headers = {
       Accept: "application/json",
       "User-Agent":
-        "SEMBIOTIC-VERCEL-PROXY/2.0"
+        "SEMBIOTIC-VERCEL-PROXY/3.0"
     };
 
     let body;
@@ -123,12 +120,12 @@ async function proxyJson(
         method,
         headers,
         body,
-        signal: controller.signal,
-        cache: "no-store"
+        cache: "no-store",
+        signal: controller.signal
       }
     );
 
-    const responseBody = Buffer.from(
+    const buffer = Buffer.from(
       await upstream.arrayBuffer()
     );
 
@@ -144,15 +141,12 @@ async function proxyJson(
 
     res.setHeader(
       "Cache-Control",
-      upstream.headers.get(
-        "cache-control"
-      ) ||
       "no-store"
     );
 
     res.setHeader(
       "X-Sembiotic-Proxy",
-      "vercel-to-local-field"
+      "same-origin-fast-field"
     );
 
     if (method === "HEAD") {
@@ -162,27 +156,15 @@ async function proxyJson(
 
     res.setHeader(
       "Content-Length",
-      String(responseBody.length)
+      String(buffer.length)
     );
 
-    res.end(responseBody);
+    res.end(buffer);
 
   } catch (error) {
     const timeout =
       error &&
       error.name === "AbortError";
-
-    const payload = Buffer.from(
-      JSON.stringify({
-        error: timeout
-          ? "Sembiotic field request timed out"
-          : "Sembiotic field backend is unreachable",
-        detail:
-          error instanceof Error
-            ? error.message
-            : String(error)
-      })
-    );
 
     res.statusCode = timeout
       ? 504
@@ -198,17 +180,20 @@ async function proxyJson(
       "no-store"
     );
 
-    res.setHeader(
-      "Content-Length",
-      String(payload.length)
+    res.end(
+      JSON.stringify({
+        error: timeout
+          ? "Sembiotic request timed out"
+          : "Sembiotic backend is unreachable",
+        detail:
+          error instanceof Error
+            ? error.message
+            : String(error)
+      })
     );
 
-    res.end(payload);
-
   } finally {
-    if (timer) {
-      clearTimeout(timer);
-    }
+    clearTimeout(timer);
   }
 }
 

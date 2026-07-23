@@ -1,0 +1,1971 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- SEMBIOTIC_RANKING_BUILD continuous-50-page-full-field -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sembiotic — Search Biology by Meaning</title>
+<meta name="description" content="A deterministic biological field for cells, pathways, assays, images, papers, products, experiments, and operations. Runs on ARBITER: 26MB, 72D.">
+<meta name="theme-color" content="#050605">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sembiotic — Search Biology by Meaning">
+<meta property="og:description" content="Resolve a biological objective across a private deterministic field.">
+<link rel="icon" href="/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050605;--panel:#090a09;--panel2:#0d0f0d;--ink:#f1f0eb;--muted:rgba(241,240,235,.65);--faint:rgba(241,240,235,.38);
+  --line:rgba(255,255,255,.16);--line2:rgba(255,255,255,.08);--green:#55e77a;--red:#ff6262;
+  --serif:'Instrument Serif',Georgia,serif;--sans:'Instrument Sans',Arial,sans-serif;--mono:'Fragment Mono',monospace;
+}
+*{box-sizing:border-box}html,body{margin:0;min-width:320px;min-height:100%;background:var(--bg);color:var(--ink)}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}button,input{font:inherit;color:inherit}button{cursor:pointer}
+.app{height:100svh;min-height:700px;background:radial-gradient(circle at 72% 10%,rgba(85,231,122,.025),transparent 28%),var(--bg);display:grid;grid-template-rows:82px minmax(0,1fr) 270px 30px;padding:0 42px 14px;overflow:hidden}
+.top{display:grid;grid-template-columns:270px minmax(320px,1fr) 164px;gap:28px;align-items:center;border-bottom:1px solid var(--line2)}
+.brand button{all:unset;cursor:pointer;font:400 30px/1 var(--serif);letter-spacing:.06em;text-transform:uppercase}
+.query-form{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);padding:8px 0}.query-form input{min-width:0;width:100%;border:0;outline:0;background:transparent;font:400 clamp(21px,2vw,31px)/1.1 var(--serif);letter-spacing:-.02em}.query-form input::placeholder{color:rgba(241,240,235,.38)}
+.query-form button,.nav-count button{width:40px;height:40px;border:1px solid var(--line);background:transparent;display:grid;place-items:center}.query-form button:hover,.nav-count button:hover{border-color:var(--green);color:var(--green)}.query-form button.running{animation:pulse .8s ease-in-out infinite alternate}
+.nav-count{display:flex;justify-content:flex-end;align-items:center;gap:10px;font:10px var(--mono);letter-spacing:.12em}.nav-count b{font-weight:400;color:var(--green)}
+.stage{min-height:0;display:grid;grid-template-columns:minmax(370px,560px) minmax(360px,1fr);gap:34px;padding:30px 0 24px;overflow:hidden}
+.copy{min-width:0;display:flex;flex-direction:column;justify-content:center;padding-left:8px}.kicker{font:10px var(--mono);letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}.kicker .score{color:var(--green)}
+.title{font:400 clamp(48px,5vw,78px)/.91 var(--serif);letter-spacing:-.042em;margin:0;max-width:10.6ch;text-wrap:balance}.description{font:13px/1.55 var(--mono);color:var(--muted);max-width:58ch;margin:20px 0 22px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+.actions{display:flex;gap:9px;flex-wrap:wrap}.action{height:40px;padding:0 14px;border:1px solid var(--line);background:transparent;font:9px var(--mono);letter-spacing:.13em;text-transform:uppercase}.action.primary{border-color:rgba(85,231,122,.66);color:var(--green)}.action:hover:not(:disabled){border-color:#fff;background:rgba(255,255,255,.05)}.action:disabled{opacity:.3;cursor:not-allowed}
+.engine{display:flex;align-items:center;gap:9px;margin-top:21px;font:9px var(--mono);letter-spacing:.14em;text-transform:uppercase}.engine i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(85,231,122,.07)}.engine.offline i{background:var(--red);box-shadow:0 0 0 4px rgba(255,98,98,.07)}
+.media-panel{min-width:0;min-height:0;border:1px solid var(--line);background:var(--panel);position:relative;overflow:hidden;display:flex}.media-panel::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line2) 1px,transparent 1px),linear-gradient(90deg,var(--line2) 1px,transparent 1px);background-size:72px 72px;opacity:.18;pointer-events:none}
+.media-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .32s ease}.media-image.show{opacity:1}.media-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,5,.15),transparent 42%),linear-gradient(0deg,rgba(5,6,5,.65),transparent 32%);opacity:0;transition:opacity .32s}.media-image.show+.media-shade{opacity:1}
+.media-meta{position:absolute;z-index:2;left:18px;right:18px;bottom:15px;display:flex;justify-content:space-between;align-items:end;gap:20px;font:8px/1.45 var(--mono);letter-spacing:.07em;color:rgba(255,255,255,.68);text-transform:uppercase;opacity:0;transition:opacity .32s}.media-meta.show{opacity:1}.media-meta a{color:inherit}.media-meta .no-credit{margin-left:auto}
+.field{min-height:0;display:grid;grid-template-rows:40px minmax(0,1fr);border-top:1px solid var(--line2)}.field-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line2);min-width:0}.buckets{height:100%;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}.buckets::-webkit-scrollbar{display:none}.bucket{height:100%;padding:0 18px;border:0;border-right:1px solid var(--line2);background:transparent;font:9px var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}.bucket b{font-weight:400;color:var(--faint);margin-left:4px}.bucket.active{color:var(--green);background:rgba(85,231,122,.035)}.field-sort{padding-left:16px;white-space:nowrap;font:8px var(--mono);letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.rail-wrap{position:relative;min-height:0}.rail{height:100%;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;padding:10px 0 0;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}.tile{position:relative;flex:0 0 172px;height:100%;border:1px solid var(--line);background:var(--panel);padding:0;text-align:left;overflow:hidden}.tile.active{border-color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}.tile:hover{border-color:#fff}.tile-media{height:59%;background:var(--panel2);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}.tile-media img{width:100%;height:100%;object-fit:cover;display:none}.tile-media img.show{display:block}.tile-rank,.tile-score{position:absolute;z-index:2;top:8px;font:9px var(--mono);padding:2px 4px;background:rgba(5,6,5,.72)}.tile-rank{left:8px;color:var(--green)}.tile-score{right:8px;color:var(--green)}.tile-copy{height:41%;padding:9px;display:flex;flex-direction:column;border-top:1px solid var(--line2)}.tile-title{font:9px/1.25 var(--mono);text-transform:uppercase;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}.tile-type{margin-top:auto;font:8px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}.rail-arrow{position:absolute;z-index:4;top:43%;width:38px;height:38px;border:1px solid var(--line);background:rgba(5,6,5,.9)}.rail-arrow.left{left:-38px}.rail-arrow.right{right:0}.rail-arrow:hover{border-color:var(--green);color:var(--green)}
+.empty{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2);font:9px var(--mono);letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.footer{display:flex;align-items:end;justify-content:space-between;font:8px var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}.footer-left,.footer-right{display:flex;gap:24px}.footer b{font-weight:400;color:var(--muted)}.footer b.online{color:var(--green)}
+.processing{position:fixed;inset:0;z-index:20;background:rgba(5,6,5,.9);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center}.processing.show{display:flex}.process{width:min(700px,calc(100vw - 40px));border:1px solid var(--line);background:var(--panel);padding:32px}.process small{font:9px var(--mono);letter-spacing:.14em;color:var(--green);text-transform:uppercase}.process h2{font:400 clamp(32px,5vw,58px)/1 var(--serif);margin:18px 0 28px}.statusline{display:flex;justify-content:space-between;font:9px var(--mono);letter-spacing:.08em}.track{height:2px;background:rgba(255,255,255,.13);margin-top:15px;overflow:hidden}.track span{display:block;width:38%;height:100%;background:var(--green);animation:scan 1.1s ease-in-out infinite}.toast{position:fixed;z-index:40;left:50%;bottom:26px;transform:translate(-50%,16px);background:var(--ink);color:#080908;padding:10px 15px;font:9px var(--mono);letter-spacing:.08em;text-transform:uppercase;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes pulse{to{border-color:var(--green);color:var(--green)}}@keyframes scan{0%{transform:translateX(-110%)}100%{transform:translateX(270%)}}
+@media(max-width:1100px){.app{grid-template-rows:76px minmax(0,1fr) 245px 28px;padding:0 24px 10px}.top{grid-template-columns:210px 1fr 126px;gap:18px}.brand button{font-size:25px}.stage{grid-template-columns:minmax(330px,500px) 1fr;gap:22px;padding:24px 0 18px}.title{font-size:58px}.description{font-size:11px}.tile{flex-basis:154px}.rail-arrow.left{left:-22px}}
+@media(max-width:760px){body{overflow:auto}.app{height:auto;min-height:100svh;grid-template-rows:auto auto auto 32px;padding:0 14px 10px;overflow:visible}.top{grid-template-columns:1fr 92px;grid-template-rows:50px 68px;gap:0}.brand button{font-size:22px}.query-form{grid-column:1/3}.query-form input{font-size:23px}.nav-count{grid-column:2;grid-row:1}.nav-count span{display:none}.stage{display:flex;flex-direction:column;padding:24px 0 18px;overflow:visible}.copy{order:1;padding:0}.media-panel{order:2;height:42vh;min-height:280px;margin-top:22px}.title{font-size:clamp(48px,15vw,68px);max-width:9ch}.description{-webkit-line-clamp:4}.actions .action:nth-child(n+4){display:none}.field{height:255px}.field-sort{display:none}.bucket{padding:0 13px}.tile{flex-basis:132px}.rail-arrow{display:none}.footer-right,.footer-left span:nth-child(n+3){display:none}}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand"><button id="brand">Sembiotic</button></div>
+    <form class="query-form" id="queryForm">
+      <input id="query" autocomplete="off" spellcheck="false" placeholder="describe the biology you want to resolve">
+      <button id="submit" aria-label="Search">→</button>
+    </form>
+    <div class="nav-count"><span><b id="position">00</b> / <span id="total">00</span></span><button id="prev" aria-label="Previous result">←</button><button id="next" aria-label="Next result">→</button></div>
+  </header>
+
+  <section class="stage">
+    <div class="copy">
+      <p class="kicker"><span id="type">BIOLOGICAL FIELD</span> · RESONANCE <span class="score" id="score">—</span></p>
+      <h1 class="title" id="title">Search biology by meaning.</h1>
+      <p class="description" id="description">Cells, pathways, assays, images, papers, products, experiments, and operations resolved across one deterministic field.</p>
+      <div class="actions">
+        <button class="action primary" id="openRecord" disabled>Open record →</button>
+        <button class="action" id="share">Share</button>
+        <button class="action" id="cite">Cite</button>
+        <button class="action" id="save">Save</button>
+        <button class="action" id="export">Export</button>
+      </div>
+      <div class="engine" id="engine"><i></i><span>Runs on ARBITER · 26MB · 72D</span></div>
+    </div>
+
+    <div class="media-panel" id="mediaPanel">
+      <img class="media-image" id="mediaImage" alt="">
+      <div class="media-shade"></div>
+      <div class="media-meta" id="mediaMeta"></div>
+    </div>
+  </section>
+
+  <section class="field">
+    <div class="field-head"><div class="buckets" id="buckets"></div><div class="field-sort">Ranked by resonance ↓</div></div>
+    <div class="rail-wrap"><button class="rail-arrow left" id="railLeft">←</button><div class="rail" id="rail"><div class="empty">Search to resolve the ranked biological field</div></div><button class="rail-arrow right" id="railRight">→</button></div>
+  </section>
+
+  <footer class="footer"><div class="footer-left"><span>ARBITER STATUS <b class="online" id="status">CONNECTING</b></span><span>INDEX <b id="indexCount">—</b></span><span>RECORD MEDIA <b id="mediaCount">—</b></span><span>LAST QUERY <b id="latency">—</b></span></div><div class="footer-right"><span>PRIVATE</span><span>DETERMINISTIC</span><span>LOCAL-FIRST</span></div></footer>
+
+  <div class="processing" id="processing"><div class="process"><small>ARBITER FIELD RESOLVING</small><h2 id="processQuery"></h2><div class="statusline"><span id="processStatus">Encoding objective in 72D</span><span id="processObjects">— objects</span></div><div class="track"><span></span></div></div></div>
+  <div class="toast" id="toast"></div>
+</main>
+<script>
+const FIELD_BASE=window.ARBITER_BIOLOGY_FIELD_URL||window.location.origin;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const bucketOrder=['all','cells','pathways','images','assays','papers','products','experiments','operations'];
+let manifest={count:0,dimension:72},results=[],visible=[],activeIndex=0,bucket='all',running=false,statusTimer,heroMedia=[],heroIndex=0,heroTimer=null;
+const statuses=['Encoding objective in 72D','Scanning frozen biological geometry','Measuring coherence across the field','Resolving ranked biological objects'];
+
+function classify(r){
+  const s=[r.category,r.object_type,r.domain,r.mode,r.title,r.name].join(' ').toLowerCase();
+  if(/operation|logistic|inventory|cold chain|quality|capa|vendor|budget|shipping/.test(s))return'operations';
+  if(/paper|article|publication|evidence|clinical trial/.test(s))return'papers';
+  if(/product|reagent|protein|medium|media|catalog|kit|vector/.test(s))return'products';
+  if(/assay|array|qpcr|pcr|readout|screen|validation/.test(s))return'assays';
+  if(/image|imaging|microscopy|morphology|ultrastructure|phenotype/.test(s))return'images';
+  if(/pathway|signaling|mechanism|module|marker signature/.test(s))return'pathways';
+  if(/experiment|package|protocol|design|control|perturbation/.test(s))return'experiments';
+  if(/cell|neuron|astrocyte|microglia|organoid|stem|model/.test(s))return'cells';
+  return'experiments';
+}
+function normalize(r,i){
+  const fallback=heroMedia.length?[heroMedia[i%heroMedia.length].url]:[];
+  const candidates=[r.image_url,...(r.image_candidates||[]),...fallback].filter(Boolean).filter((x,n,a)=>a.indexOf(x)===n);
+  return {...r,rank:i+1,title:r.title||r.name||r.label||`Biological object ${i+1}`,description:r.text||r.description||r.summary||'',score:Number(r.score||0),type:r.category||r.object_type||'Biological object',source:r.source||'Field',recordUrl:r.canonical_record_url||r.source_url||r.url||'',images:candidates,bucket:classify(r)};
+}
+function formatCount(n){return Number(n||0).toLocaleString()}
+function shortText(s,n=420){s=String(s||'').replace(/\s+/g,' ').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s}
+function toast(text){const t=$('toast');t.textContent=text;t.classList.add('show');clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),1800)}
+function activeResult(){return visible[activeIndex]||results[0]||null}
+function bucketCounts(){const c=Object.fromEntries(bucketOrder.map(x=>[x,0]));c.all=results.length;results.forEach(r=>c[r.bucket]=(c[r.bucket]||0)+1);return c}
+function renderBuckets(){const counts=bucketCounts();$('buckets').innerHTML=bucketOrder.map(name=>`<button class="bucket ${bucket===name?'active':''}" data-bucket="${name}">${name.toUpperCase()} <b>${counts[name]||0}</b></button>`).join('');document.querySelectorAll('.bucket').forEach(b=>b.onclick=()=>{bucket=b.dataset.bucket;filterResults()})}
+function setTileImage(img,r,i){
+  const candidates=[...(r.images||[]),...(heroMedia.length?[heroMedia[i%heroMedia.length].url]:[])].filter(Boolean).filter((x,n,a)=>a.indexOf(x)===n);
+  let index=0;
+  const tryNext=()=>{if(index>=candidates.length)return;img.onload=()=>img.classList.add('show');img.onerror=()=>{img.classList.remove('show');index++;tryNext()};img.src=candidates[index]};
+  tryNext();
+}
+function renderRail(){
+  if(!visible.length){$('rail').innerHTML='<div class="empty">No objects in this field bucket</div>';return}
+  $('rail').innerHTML=visible.map((r,i)=>`<button class="tile ${i===activeIndex?'active':''}" data-i="${i}"><div class="tile-media"><img id="tileImg${i}" alt="${esc(r.title)}"><span class="tile-rank">${String(r.rank).padStart(2,'0')}</span><span class="tile-score">${r.score.toFixed(3)}</span></div><div class="tile-copy"><span class="tile-title">${esc(r.title)}</span><span class="tile-type">${esc(r.type)}</span></div></button>`).join('');
+  visible.forEach((r,i)=>setTileImage($(`tileImg${i}`),r,i));document.querySelectorAll('.tile').forEach(t=>t.onclick=()=>select(+t.dataset.i));
+}
+function clearMedia(){const img=$('mediaImage');img.classList.remove('show');img.removeAttribute('src');img.alt='';$('mediaMeta').classList.remove('show');$('mediaMeta').innerHTML=''}
+function showMedia(candidates,meta={}){
+  clearMedia();const img=$('mediaImage');let i=0;
+  const urls=(candidates||[]).filter(Boolean).filter((x,n,a)=>a.indexOf(x)===n);
+  const load=()=>{if(i>=urls.length)return;img.onload=()=>{img.classList.add('show');$('mediaMeta').classList.toggle('show',Boolean(meta.page||meta.label||meta.credit))};img.onerror=()=>{i++;load()};img.src=urls[i]};load();
+  img.alt=meta.label||'';
+  if(meta.page){$('mediaMeta').innerHTML=`<span>Image · <a target="_blank" rel="noopener" href="${esc(meta.page)}">${esc(meta.label||'scientific media')}</a>${meta.credit?' · '+esc(meta.credit):''}${meta.license?' · '+esc(meta.license):''}</span>`}
+}
+function renderHero(){
+  if(results.length||!heroMedia.length)return;
+  const m=heroMedia[heroIndex%heroMedia.length];showMedia([m.url],m);
+}
+function startHeroRotation(){clearInterval(heroTimer);if(heroMedia.length<2)return;heroTimer=setInterval(()=>{if(results.length)return;heroIndex=(heroIndex+1)%heroMedia.length;renderHero()},5200)}
+function renderMedia(r){
+  if(!r){renderHero();return}
+  const fallback=heroMedia.length?[heroMedia[r.rank%heroMedia.length].url]:[];
+  const matched=heroMedia.find(m=>(r.images||[]).includes(m.url))||{};
+  showMedia([...(r.images||[]),...fallback],{page:r.image_page||matched.page,label:r.image_label||matched.label||r.title,credit:r.image_credit||matched.credit,license:r.image_license||matched.license});
+}
+function renderActive(){
+  const r=activeResult();if(!r){$('position').textContent='00';$('total').textContent='00';clearMedia();return}
+  $('type').textContent=String(r.type).toUpperCase();$('score').textContent=r.score.toFixed(3);$('title').textContent=r.title;$('description').textContent=shortText(r.description);$('position').textContent=String(activeIndex+1).padStart(2,'0');$('total').textContent=String(visible.length).padStart(2,'0');$('openRecord').disabled=!r.recordUrl;$('openRecord').dataset.url=r.recordUrl||'';renderMedia(r);
+  document.querySelectorAll('.tile').forEach((t,i)=>t.classList.toggle('active',i===activeIndex));document.querySelector(`.tile[data-i="${activeIndex}"]`)?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
+function filterResults(){visible=bucket==='all'?results:results.filter(r=>r.bucket===bucket);activeIndex=0;renderBuckets();renderRail();renderActive()}
+function select(i){if(!visible.length)return;activeIndex=(i+visible.length)%visible.length;renderActive()}
+function step(delta){select(activeIndex+delta)}
+function begin(q){running=true;$('submit').classList.add('running');$('processQuery').textContent=q;$('processObjects').textContent=formatCount(manifest.count)+' objects';$('processing').classList.add('show');let i=0;$('processStatus').textContent=statuses[0];statusTimer=setInterval(()=>$('processStatus').textContent=statuses[++i%statuses.length],700)}
+function end(){running=false;clearInterval(statusTimer);$('submit').classList.remove('running');$('processing').classList.remove('show')}
+async function search(){const q=$('query').value.trim();if(!q||running)return;begin(q);try{const res=await fetch(FIELD_BASE+'/field/v1/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q,limit:58,mode:'unified'})});const out=await res.json();if(!res.ok)throw Error(out.error||'Field search failed');results=(out.results||[]).map(normalize);if(!results.length)throw Error('No biological objects returned');bucket='all';$('latency').textContent=(out.latency_ms||0)+'MS';filterResults();end()}catch(e){end();toast(e.message||'Field search failed')}}
+async function loadMedia(){try{const out=await fetch(FIELD_BASE+'/field/v1/media-manifest',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()});heroMedia=(out.media||[]).filter(m=>m&&m.url);$('mediaCount').textContent=formatCount(heroMedia.length);renderHero();startHeroRotation()}catch(e){heroMedia=[];$('mediaCount').textContent='—'}}
+async function loadSystem(){try{const m=await fetch(FIELD_BASE+'/field/v1/manifest',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()});manifest=m;$('indexCount').textContent=formatCount(m.count);$('status').textContent='ONLINE';$('status').classList.add('online');$('engine').classList.remove('offline')}catch(e){$('status').textContent='OFFLINE';$('status').classList.remove('online');$('engine').classList.add('offline')}}
+function currentPayload(){const r=activeResult();return r?{query:$('query').value,result:r,field:{count:manifest.count,dimension:manifest.dimension}}:null}
+function copyText(text,message){navigator.clipboard?.writeText(text).then(()=>toast(message)).catch(()=>toast('Clipboard unavailable'))}
+$('queryForm').onsubmit=e=>{e.preventDefault();search()};$('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);$('railLeft').onclick=()=>$('rail').scrollBy({left:-620,behavior:'smooth'});$('railRight').onclick=()=>$('rail').scrollBy({left:620,behavior:'smooth'});$('brand').onclick=()=>$('query').focus();$('openRecord').onclick=e=>{const u=e.currentTarget.dataset.url;if(u)window.open(u,'_blank','noopener')};
+$('share').onclick=async()=>{const p=currentPayload();if(!p)return toast('Run a field query first');const data={title:p.result.title,text:`${p.result.title} · resonance ${p.result.score.toFixed(3)}`,url:p.result.recordUrl||location.href};if(navigator.share)try{await navigator.share(data)}catch(e){}else copyText(`${data.text}\n${data.url}`,'Result copied')};
+$('cite').onclick=()=>{const r=activeResult();if(!r)return toast('Run a field query first');copyText(`${r.title}. ${r.source}. ${r.recordUrl||'Sembiotic field record'}. Resonance ${r.score.toFixed(3)}.`,'Citation copied')};
+$('save').onclick=()=>{const p=currentPayload();if(!p)return toast('Run a field query first');const saved=JSON.parse(localStorage.getItem('sembiotic:saved')||'[]');saved.unshift({...p.result,saved_at:new Date().toISOString()});localStorage.setItem('sembiotic:saved',JSON.stringify(saved.slice(0,100)));toast('Saved locally')};
+$('export').onclick=()=>{const p=currentPayload();if(!p)return toast('Run a field query first');const blob=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sembiotic-result.json';a.click();URL.revokeObjectURL(a.href)};
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&document.activeElement!==$('query'))step(-1);if(e.key==='ArrowRight'&&document.activeElement!==$('query'))step(1);if(e.key==='/'&&document.activeElement!==$('query')){e.preventDefault();$('query').focus()}if((e.metaKey||e.ctrlKey)&&e.key==='Enter')search()});
+renderBuckets();clearMedia();loadMedia();loadSystem();setInterval(loadSystem,30000);$('query').focus();
+</script>
+
+
+<!-- SEMBIOTIC_COMPLETE_PAGINATION_V3 -->
+<style id="sembiotic-complete-pagination-style">
+#sembioticDesignTab {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  min-width: 118px !important;
+}
+
+#sembioticDesignTab[data-active="true"] {
+  color: #54ff78 !important;
+  background: rgba(38,255,91,.045) !important;
+  border-color: rgba(38,255,91,.24) !important;
+}
+
+#sembioticDesignTab .sembiotic-tab-count,
+.sembiotic-tab-count {
+  display: inline-block !important;
+  margin-left: 7px !important;
+  opacity: .48 !important;
+  font-size: .84em !important;
+}
+
+#sembioticPagedOverlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 30 !important;
+  background: #030503 !important;
+  overflow: hidden !important;
+}
+
+#sembioticPagedScroller {
+  position: absolute !important;
+  inset: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  overscroll-behavior-inline: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(102,255,129,.32) transparent !important;
+  touch-action: pan-x !important;
+}
+
+#sembioticPagedSpacer {
+  position: relative !important;
+  height: 100% !important;
+  min-height: 220px !important;
+}
+
+.sembiotic-page-card {
+  position: absolute !important;
+  top: 14px !important;
+  bottom: 14px !important;
+  width: 270px !important;
+  display: grid !important;
+  grid-template-rows: minmax(92px, 52%) 1fr !important;
+  padding: 0 !important;
+  border: 1px solid rgba(142,160,146,.25) !important;
+  background: #050805 !important;
+  color: #eef2ec !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  font: inherit !important;
+}
+
+.sembiotic-page-card:hover,
+.sembiotic-page-card[data-selected="true"] {
+  border-color: rgba(72,255,107,.68) !important;
+  background: #071008 !important;
+}
+
+.sembiotic-page-image {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(42,70,47,.25),
+      rgba(4,7,4,.9)
+    ) !important;
+}
+
+.sembiotic-page-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.sembiotic-page-image::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(
+      to top,
+      rgba(2,4,2,.9),
+      transparent 72%
+    ) !important;
+  pointer-events: none !important;
+}
+
+.sembiotic-page-rank,
+.sembiotic-page-score {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 10px !important;
+  padding: 5px 7px !important;
+  background: rgba(1,4,1,.78) !important;
+  border: 1px solid rgba(180,200,183,.24) !important;
+  font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .08em !important;
+}
+
+.sembiotic-page-rank {
+  left: 10px !important;
+}
+
+.sembiotic-page-score {
+  right: 10px !important;
+  color: #56ff7a !important;
+}
+
+.sembiotic-page-copy {
+  padding: 12px 13px 14px !important;
+  min-width: 0 !important;
+}
+
+.sembiotic-page-copy strong {
+  display: block !important;
+  margin-bottom: 7px !important;
+  overflow: hidden !important;
+  font: 500 17px/1.08 Georgia, "Times New Roman", serif !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.sembiotic-page-copy small {
+  display: block !important;
+  margin-bottom: 8px !important;
+  color: rgba(235,241,235,.56) !important;
+  font: 9px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+.sembiotic-page-copy p {
+  display: -webkit-box !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  color: rgba(235,241,235,.68) !important;
+  font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+#sembioticLoadMore {
+  position: absolute !important;
+  top: 14px !important;
+  bottom: 14px !important;
+  width: 176px !important;
+  padding: 18px !important;
+  border: 1px solid rgba(72,255,107,.34) !important;
+  background: rgba(12,27,15,.6) !important;
+  color: #5cff7c !important;
+  font: 10px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .09em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+}
+
+#sembioticLoadMore:disabled {
+  cursor: default !important;
+  opacity: .5 !important;
+}
+
+#sembioticPagingStatus {
+  position: absolute !important;
+  z-index: 35 !important;
+  right: 14px !important;
+  bottom: 9px !important;
+  pointer-events: none !important;
+  color: rgba(225,235,226,.44) !important;
+  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+@media (max-width: 720px) {
+  .sembiotic-page-card {
+    width: 230px !important;
+  }
+
+  #sembioticLoadMore {
+    width: 150px !important;
+  }
+
+  #sembioticDesignTab {
+    min-width: 102px !important;
+  }
+}
+</style>
+
+<script id="sembiotic-complete-pagination-runtime">
+(() => {
+  "use strict";
+
+  const PAGE_SIZE = 50;
+  const CARD_WIDTH_DESKTOP = 270;
+  const CARD_WIDTH_MOBILE = 230;
+  const CARD_GAP = 12;
+  const BUFFER_CARDS = 10;
+
+  const state = {
+    nativeFetch: window.fetch.bind(window),
+    endpoint: "",
+    query: "",
+    mode: "unified",
+    designActive: false,
+    rows: [],
+    rowIds: new Set(),
+    rankedCount: 0,
+    fieldCount: 0,
+    loadedCount: 0,
+    bucketCounts: {},
+    rankingId: "",
+    cursor: null,
+    hasMore: false,
+    loadingMore: false,
+    activeIndex: 0,
+    generation: 0,
+    initialController: null,
+    pageController: null,
+    railHost: null,
+    overlay: null,
+    scroller: null,
+    spacer: null,
+    loadButton: null,
+    visibleCards: new Map(),
+    observer: null,
+    manifest: null
+  };
+
+  const normalizeText = value =>
+    String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const lowerText = value =>
+    normalizeText(value).toLowerCase();
+
+  const escapeHtml = value =>
+    String(value ?? "").replace(
+      /[&<>"']/g,
+      character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[character]
+    );
+
+  const numeric = value => {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : 0;
+  };
+
+  const formatCount = value =>
+    numeric(value).toLocaleString();
+
+  function requestUrl(input) {
+    if (typeof input === "string") {
+      return input;
+    }
+
+    return String(
+      input && input.url || ""
+    );
+  }
+
+  function searchInput() {
+    return (
+      document.querySelector("#query") ||
+      document.querySelector("#searchInput") ||
+      document.querySelector("#queryInput") ||
+      document.querySelector(
+        'textarea[placeholder*="biology" i]'
+      ) ||
+      document.querySelector("textarea") ||
+      document.querySelector(
+        'input[type="search"]'
+      )
+    );
+  }
+
+  function rowIdentifier(row, index) {
+    return String(
+      row.id ||
+      row.code ||
+      row.identifier ||
+      row.doi ||
+      row.url ||
+      [
+        row.title || row.name || "",
+        row.source || "",
+        row.rank || index
+      ].join("|")
+    );
+  }
+
+  function imageUrl(row) {
+    const metadata =
+      row && typeof row.metadata === "object"
+        ? row.metadata
+        : {};
+
+    return String(
+      row.image ||
+      row.image_url ||
+      row.media_url ||
+      row.thumbnail ||
+      row.poster ||
+      metadata.image ||
+      metadata.image_url ||
+      metadata.media_url ||
+      metadata.thumbnail ||
+      ""
+    );
+  }
+
+  function normalizeRow(row, index) {
+    const rank = numeric(
+      row.rank ||
+      state.rows.length + index + 1
+    );
+
+    return {
+      ...row,
+      id: rowIdentifier(row, index),
+      rank,
+      score: numeric(
+        row.score ??
+        row.resonance ??
+        row.coherence
+      ),
+      title: String(
+        row.title ||
+        row.name ||
+        row.label ||
+        `Biological object ${rank}`
+      ),
+      description: String(
+        row.description ||
+        row.text ||
+        row.summary ||
+        row.content ||
+        ""
+      ),
+      category: String(
+        row.category ||
+        row.object_type ||
+        row.type ||
+        "Biological object"
+      ),
+      domain: String(
+        row.domain ||
+        row.mode ||
+        "unified"
+      ),
+      source: String(
+        row.source ||
+        row.code ||
+        "Sembiotic field"
+      ),
+      image: imageUrl(row)
+    };
+  }
+
+  function responseRows(payload) {
+    if (Array.isArray(payload)) {
+      return payload;
+    }
+
+    if (!payload || typeof payload !== "object") {
+      return [];
+    }
+
+    return (
+      payload.results ||
+      payload.matches ||
+      payload.items ||
+      payload.ranked ||
+      payload.top ||
+      []
+    );
+  }
+
+  function addRows(rows) {
+    let added = 0;
+
+    for (const rawRow of rows) {
+      const row = normalizeRow(
+        rawRow,
+        state.rows.length
+      );
+
+      if (state.rowIds.has(row.id)) {
+        continue;
+      }
+
+      state.rowIds.add(row.id);
+      state.rows.push(row);
+      added += 1;
+    }
+
+    return added;
+  }
+
+  function removeBrokenDesignControls() {
+    [
+      "sembioticDesignFieldControl",
+      "sembioticDesignFieldStrip",
+      "sembioticDesignControl",
+      "sembioticDesignStrip"
+    ].forEach(identifier => {
+      document
+        .getElementById(identifier)
+        ?.remove();
+    });
+
+    for (const element of document.querySelectorAll(
+      "button,a,[role='button']"
+    )) {
+      if (element.id === "sembioticDesignTab") {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        text === "design field" ||
+        text === "design fields"
+      ) {
+        element.remove();
+      }
+    }
+  }
+
+  function tabStrip() {
+    const labels = [
+      "all",
+      "cells",
+      "pathways",
+      "images",
+      "assays",
+      "papers",
+      "products",
+      "experiments",
+      "operations"
+    ];
+
+    let best = null;
+    let bestScore = 0;
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (
+        element.children.length < 5 ||
+        element.children.length > 18
+      ) {
+        continue;
+      }
+
+      const childTexts = [
+        ...element.children
+      ].map(child =>
+        lowerText(child.textContent)
+      );
+
+      const score = labels.filter(label =>
+        childTexts.some(text =>
+          text.startsWith(label)
+        )
+      ).length;
+
+      if (score > bestScore) {
+        best = element;
+        bestScore = score;
+      }
+    }
+
+    return bestScore >= 5
+      ? best
+      : null;
+  }
+
+  function setDesignActive(active) {
+    state.designActive = Boolean(active);
+
+    const tab = document.getElementById(
+      "sembioticDesignTab"
+    );
+
+    if (tab) {
+      tab.dataset.active = String(
+        state.designActive
+      );
+
+      tab.setAttribute(
+        "aria-selected",
+        String(state.designActive)
+      );
+    }
+
+    globalThis.SEMBIOTIC_MODE =
+      state.designActive
+        ? "design"
+        : "unified";
+  }
+
+  function installDesignTab() {
+    removeBrokenDesignControls();
+
+    const strip = tabStrip();
+
+    if (!strip) {
+      return;
+    }
+
+    let tab = document.getElementById(
+      "sembioticDesignTab"
+    );
+
+    if (!tab) {
+      const operations = [
+        ...strip.children
+      ].find(child =>
+        lowerText(
+          child.textContent
+        ).startsWith("operations")
+      );
+
+      tab = operations
+        ? operations.cloneNode(false)
+        : document.createElement("button");
+
+      tab.id = "sembioticDesignTab";
+
+      if (
+        tab.tagName === "BUTTON"
+      ) {
+        tab.type = "button";
+      }
+
+      tab.removeAttribute("id");
+      tab.id = "sembioticDesignTab";
+      tab.removeAttribute("data-filter");
+      tab.removeAttribute("data-mode");
+      tab.removeAttribute("data-type");
+      tab.removeAttribute("data-bucket");
+
+      tab.dataset.filter = "design";
+      tab.dataset.mode = "design";
+      tab.dataset.bucket = "design";
+
+      tab.innerHTML =
+        '<span>DESIGNS</span>' +
+        '<span class="sembiotic-tab-count">0</span>';
+
+      strip.appendChild(tab);
+
+      tab.addEventListener(
+        "click",
+        event => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+
+          setDesignActive(true);
+
+          for (const sibling of strip.children) {
+            if (sibling !== tab) {
+              sibling.classList.remove(
+                "active",
+                "selected",
+                "is-active"
+              );
+
+              sibling.setAttribute(
+                "aria-selected",
+                "false"
+              );
+            }
+          }
+
+          tab.classList.add("active");
+          tab.setAttribute(
+            "aria-selected",
+            "true"
+          );
+
+          searchInput()?.focus();
+        },
+        true
+      );
+
+      strip.addEventListener(
+        "click",
+        event => {
+          const target = event.target.closest(
+            "button,a,[role='tab'],[data-filter],[data-mode],[data-type],[data-bucket]"
+          );
+
+          if (
+            target &&
+            target.id !== "sembioticDesignTab"
+          ) {
+            setDesignActive(false);
+          }
+        },
+        true
+      );
+    }
+
+    updateTabCounts();
+  }
+
+  function updateTabCounts() {
+    const strip = tabStrip();
+
+    if (!strip) {
+      return;
+    }
+
+    const counts = {
+      all:
+        state.bucketCounts.all ??
+        state.rankedCount,
+      cells:
+        state.bucketCounts.cells ?? 0,
+      pathways:
+        state.bucketCounts.pathways ?? 0,
+      images:
+        state.bucketCounts.images ?? 0,
+      assays:
+        state.bucketCounts.assays ?? 0,
+      papers:
+        state.bucketCounts.papers ?? 0,
+      products:
+        state.bucketCounts.products ?? 0,
+      experiments:
+        state.bucketCounts.experiments ?? 0,
+      operations:
+        state.bucketCounts.operations ?? 0,
+      designs:
+        state.bucketCounts.design ??
+        state.manifest?.design_field?.count ??
+        state.manifest?.domains?.design ??
+        0
+    };
+
+    for (const child of strip.children) {
+      const text = lowerText(
+        child.textContent
+      );
+
+      const label = Object.keys(counts).find(
+        candidate =>
+          text.startsWith(candidate) ||
+          (
+            candidate === "designs" &&
+            text.startsWith("design")
+          )
+      );
+
+      if (!label) {
+        continue;
+      }
+
+      let countNode = child.querySelector(
+        ".sembiotic-tab-count"
+      );
+
+      if (!countNode) {
+        countNode =
+          document.createElement("span");
+
+        countNode.className =
+          "sembiotic-tab-count";
+
+        child.appendChild(countNode);
+      }
+
+      countNode.textContent = formatCount(
+        counts[label]
+      );
+    }
+  }
+
+  function findRailHost() {
+    const explicit = [
+      "#rail",
+      "#resultRail",
+      "#resultsRail",
+      "#rankedRail",
+      "#rankedResults",
+      "#resultsList",
+      ".ranked-rail",
+      ".result-rail",
+      ".results-rail",
+      ".rail"
+    ];
+
+    for (const selector of explicit) {
+      const element =
+        document.querySelector(selector);
+
+      if (!element) {
+        continue;
+      }
+
+      const rectangle =
+        element.getBoundingClientRect();
+
+      if (
+        rectangle.width > 300 &&
+        rectangle.height > 110
+      ) {
+        return element;
+      }
+    }
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        !text.includes(
+          "search to resolve the ranked biological field"
+        )
+      ) {
+        continue;
+      }
+
+      let parent = element;
+
+      for (let depth = 0; depth < 5; depth += 1) {
+        const rectangle =
+          parent.getBoundingClientRect();
+
+        if (
+          rectangle.width > 500 &&
+          rectangle.height > 150
+        ) {
+          return parent;
+        }
+
+        parent = parent.parentElement;
+
+        if (!parent) {
+          break;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  function cardWidth() {
+    return window.innerWidth <= 720
+      ? CARD_WIDTH_MOBILE
+      : CARD_WIDTH_DESKTOP;
+  }
+
+  function stride() {
+    return cardWidth() + CARD_GAP;
+  }
+
+  function installOverlay() {
+    if (!state.rows.length) {
+      return false;
+    }
+
+    if (!state.railHost) {
+      state.railHost = findRailHost();
+    }
+
+    if (!state.railHost) {
+      return false;
+    }
+
+    state.railHost.style.position =
+      "relative";
+
+    state.railHost.style.overflow =
+      "hidden";
+
+    let overlay = document.getElementById(
+      "sembioticPagedOverlay"
+    );
+
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "sembioticPagedOverlay";
+
+      overlay.innerHTML =
+        '<div id="sembioticPagedScroller">' +
+          '<div id="sembioticPagedSpacer"></div>' +
+        '</div>' +
+        '<div id="sembioticPagingStatus"></div>';
+
+      state.railHost.appendChild(overlay);
+    }
+
+    state.overlay = overlay;
+    state.scroller = document.getElementById(
+      "sembioticPagedScroller"
+    );
+    state.spacer = document.getElementById(
+      "sembioticPagedSpacer"
+    );
+
+    if (!state.scroller.dataset.bound) {
+      state.scroller.dataset.bound = "true";
+
+      state.scroller.addEventListener(
+        "scroll",
+        () => {
+          renderVirtualWindow();
+
+          const remaining =
+            state.scroller.scrollWidth -
+            (
+              state.scroller.scrollLeft +
+              state.scroller.clientWidth
+            );
+
+          if (
+            remaining <= 700 &&
+            state.hasMore &&
+            !state.loadingMore
+          ) {
+            loadNextPage();
+          }
+        },
+        {
+          passive: true
+        }
+      );
+
+      state.scroller.addEventListener(
+        "touchstart",
+        () => {},
+        {
+          passive: true
+        }
+      );
+
+      window.addEventListener(
+        "resize",
+        () => {
+          updateSpacer();
+          renderVirtualWindow();
+        },
+        {
+          passive: true
+        }
+      );
+    }
+
+    updateSpacer();
+    renderVirtualWindow();
+    updatePagingStatus();
+    return true;
+  }
+
+  function updateSpacer() {
+    if (!state.spacer) {
+      return;
+    }
+
+    const extra = 188;
+
+    state.spacer.style.width =
+      (
+        state.rows.length * stride() +
+        extra
+      ) + "px";
+
+    installLoadButton();
+  }
+
+  function installLoadButton() {
+    if (!state.spacer) {
+      return;
+    }
+
+    let button = document.getElementById(
+      "sembioticLoadMore"
+    );
+
+    if (!button) {
+      button = document.createElement("button");
+      button.id = "sembioticLoadMore";
+      button.type = "button";
+
+      button.addEventListener(
+        "click",
+        () => loadNextPage()
+      );
+
+      state.spacer.appendChild(button);
+    }
+
+    state.loadButton = button;
+
+    button.style.left =
+      (
+        state.rows.length * stride()
+      ) + "px";
+
+    if (state.loadingMore) {
+      button.disabled = true;
+      button.textContent =
+        `Loading ranks ` +
+        `${state.rows.length + 1}–` +
+        `${Math.min(
+          state.rows.length + PAGE_SIZE,
+          state.rankedCount
+        )}…`;
+
+    } else if (state.hasMore) {
+      button.disabled = false;
+      button.textContent =
+        `Load next ${PAGE_SIZE}\n` +
+        `${formatCount(state.rows.length)} of ` +
+        `${formatCount(state.rankedCount)} loaded`;
+
+    } else {
+      button.disabled = true;
+      button.textContent =
+        `End of ranked field\n` +
+        `${formatCount(state.rankedCount)} candidates`;
+    }
+
+    if (state.observer) {
+      state.observer.disconnect();
+    }
+
+    if (
+      "IntersectionObserver" in window &&
+      state.hasMore
+    ) {
+      state.observer =
+        new IntersectionObserver(
+          entries => {
+            if (
+              entries.some(
+                entry => entry.isIntersecting
+              ) &&
+              state.hasMore &&
+              !state.loadingMore
+            ) {
+              loadNextPage();
+            }
+          },
+          {
+            root: state.scroller,
+            rootMargin: "0px 600px 0px 0px",
+            threshold: 0.01
+          }
+        );
+
+      state.observer.observe(button);
+    }
+  }
+
+  function createCard(index) {
+    const row = state.rows[index];
+
+    if (!row) {
+      return null;
+    }
+
+    const button = document.createElement(
+      "button"
+    );
+
+    button.type = "button";
+    button.className =
+      "sembiotic-page-card";
+
+    button.dataset.index = String(index);
+    button.dataset.selected = String(
+      index === state.activeIndex
+    );
+
+    button.style.left =
+      (
+        index * stride()
+      ) + "px";
+
+    const image = row.image
+      ? (
+          '<img loading="lazy" decoding="async" ' +
+          'referrerpolicy="no-referrer" src="' +
+          escapeHtml(row.image) +
+          '" alt="">'
+        )
+      : "";
+
+    button.innerHTML =
+      '<div class="sembiotic-page-image">' +
+        image +
+        '<span class="sembiotic-page-rank">' +
+          String(row.rank).padStart(2, "0") +
+        '</span>' +
+        '<span class="sembiotic-page-score">' +
+          row.score.toFixed(3) +
+        '</span>' +
+      '</div>' +
+      '<div class="sembiotic-page-copy">' +
+        '<strong>' +
+          escapeHtml(row.title) +
+        '</strong>' +
+        '<small>' +
+          escapeHtml(row.category) +
+          " · " +
+          escapeHtml(row.source) +
+        '</small>' +
+        '<p>' +
+          escapeHtml(row.description) +
+        '</p>' +
+      '</div>';
+
+    button.addEventListener(
+      "click",
+      () => selectRow(index)
+    );
+
+    return button;
+  }
+
+  function renderVirtualWindow() {
+    if (
+      !state.scroller ||
+      !state.spacer
+    ) {
+      return;
+    }
+
+    const currentStride = stride();
+
+    const start = Math.max(
+      0,
+      Math.floor(
+        state.scroller.scrollLeft /
+        currentStride
+      ) - BUFFER_CARDS
+    );
+
+    const end = Math.min(
+      state.rows.length,
+      Math.ceil(
+        (
+          state.scroller.scrollLeft +
+          state.scroller.clientWidth
+        ) /
+        currentStride
+      ) + BUFFER_CARDS
+    );
+
+    for (
+      const [index, card]
+      of state.visibleCards
+    ) {
+      if (
+        index < start ||
+        index >= end
+      ) {
+        card.remove();
+        state.visibleCards.delete(index);
+      }
+    }
+
+    for (
+      let index = start;
+      index < end;
+      index += 1
+    ) {
+      if (
+        state.visibleCards.has(index)
+      ) {
+        const existing =
+          state.visibleCards.get(index);
+
+        existing.style.left =
+          (
+            index * currentStride
+          ) + "px";
+
+        existing.dataset.selected =
+          String(
+            index === state.activeIndex
+          );
+
+        continue;
+      }
+
+      const card = createCard(index);
+
+      if (!card) {
+        continue;
+      }
+
+      state.visibleCards.set(
+        index,
+        card
+      );
+
+      state.spacer.appendChild(card);
+    }
+  }
+
+  function candidateHeading() {
+    const selectors = [
+      "#recordTitle",
+      "#heroTitle",
+      "#resultTitle",
+      ".record-title",
+      ".hero-title",
+      ".record h1",
+      ".record h2",
+      "main h1",
+      "main h2"
+    ];
+
+    for (const selector of selectors) {
+      const element =
+        document.querySelector(selector);
+
+      if (
+        element &&
+        !lowerText(
+          element.textContent
+        ).includes("sembiotic")
+      ) {
+        return element;
+      }
+    }
+
+    return null;
+  }
+
+  function candidateDescription() {
+    const selectors = [
+      "#recordDescription",
+      "#heroDescription",
+      "#resultDescription",
+      ".record-description",
+      ".hero-description",
+      ".record p",
+      "main p"
+    ];
+
+    for (const selector of selectors) {
+      const element =
+        document.querySelector(selector);
+
+      if (element) {
+        return element;
+      }
+    }
+
+    return null;
+  }
+
+  function updateTopCounter(row) {
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = normalizeText(
+        element.textContent
+      );
+
+      if (
+        /^\d+\s*\/\s*\d+$/.test(text) ||
+        /^\d+\s*\/\s*\d+\s*$/.test(text)
+      ) {
+        element.textContent =
+          `${String(row.rank).padStart(2, "0")} / ` +
+          `${formatCount(state.rankedCount)}`;
+
+        return;
+      }
+    }
+  }
+
+  function selectRow(index) {
+    const row = state.rows[index];
+
+    if (!row) {
+      return;
+    }
+
+    state.activeIndex = index;
+    renderVirtualWindow();
+
+    const heading = candidateHeading();
+
+    if (heading) {
+      heading.textContent = row.title;
+    }
+
+    const description =
+      candidateDescription();
+
+    if (description) {
+      description.textContent =
+        row.description;
+    }
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        text.includes("resonance") &&
+        text.length < 90
+      ) {
+        element.textContent =
+          `${row.category.toUpperCase()} · ` +
+          `RESONANCE ${row.score.toFixed(3)}`;
+
+        break;
+      }
+    }
+
+    const mediaSelectors = [
+      "#heroMedia img",
+      "#recordMedia img",
+      ".media-panel img",
+      ".record-media img",
+      ".hero-media img"
+    ];
+
+    if (row.image) {
+      for (const selector of mediaSelectors) {
+        const image =
+          document.querySelector(selector);
+
+        if (!image) {
+          continue;
+        }
+
+        image.src = row.image;
+        image.alt = row.title;
+        break;
+      }
+    }
+
+    const recordLink = [
+      ...document.querySelectorAll(
+        "a,button"
+      )
+    ].find(element =>
+      lowerText(
+        element.textContent
+      ).startsWith("open record")
+    );
+
+    const recordUrl =
+      row.source_url ||
+      row.url ||
+      row.link ||
+      "";
+
+    if (
+      recordLink &&
+      recordUrl &&
+      recordLink.tagName === "A"
+    ) {
+      recordLink.href = recordUrl;
+    }
+
+    updateTopCounter(row);
+    updatePagingStatus();
+  }
+
+  function updatePagingStatus() {
+    const status = document.getElementById(
+      "sembioticPagingStatus"
+    );
+
+    if (status) {
+      status.textContent =
+        `${formatCount(state.rows.length)} loaded · ` +
+        `${formatCount(state.rankedCount)} ranked`;
+    }
+
+    updateTabCounts();
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        text === "ranked by resonance ↓" ||
+        text === "ranked by resonance" ||
+        /^ranked \d/.test(text)
+      ) {
+        element.textContent =
+          `LOADED ${formatCount(state.rows.length)} ` +
+          `OF ${formatCount(state.rankedCount)} · ` +
+          `RANKED BY RESONANCE ↓`;
+
+        break;
+      }
+    }
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        /^\d+\s+returned$/.test(text) ||
+        /^\d+\s+loaded/.test(text)
+      ) {
+        element.textContent =
+          `${formatCount(state.rows.length)} loaded ` +
+          `of ${formatCount(state.rankedCount)}`;
+
+        break;
+      }
+    }
+  }
+
+  async function loadNextPage() {
+    if (
+      state.loadingMore ||
+      !state.hasMore ||
+      !state.endpoint
+    ) {
+      return;
+    }
+
+    state.loadingMore = true;
+    installLoadButton();
+
+    state.pageController?.abort();
+    state.pageController =
+      new AbortController();
+
+    const generation =
+      state.generation;
+
+    const payload = {
+      query: state.query,
+      mode: state.mode,
+      domain: state.mode,
+      ranking_id: state.rankingId,
+      cursor: state.cursor,
+      page_size: PAGE_SIZE
+    };
+
+    try {
+      let response = await state.nativeFetch(
+        state.endpoint,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+            "X-Sembiotic-Page":
+              "continuation"
+          },
+          body: JSON.stringify(payload),
+          signal:
+            state.pageController.signal
+        }
+      );
+
+      if (
+        response.status === 409 ||
+        response.status === 410
+      ) {
+        response = await state.nativeFetch(
+          state.endpoint,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "X-Sembiotic-Page":
+                "recovery"
+            },
+            body: JSON.stringify({
+              query: state.query,
+              mode: state.mode,
+              domain: state.mode,
+              offset: state.rows.length,
+              page_size: PAGE_SIZE
+            }),
+            signal:
+              state.pageController.signal
+          }
+        );
+      }
+
+      const payloadOut =
+        await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          payloadOut.error ||
+          `HTTP ${response.status}`
+        );
+      }
+
+      if (
+        generation !== state.generation
+      ) {
+        return;
+      }
+
+      addRows(
+        responseRows(payloadOut)
+      );
+
+      state.rankingId =
+        payloadOut.ranking_id ||
+        state.rankingId;
+
+      state.cursor =
+        payloadOut.next_cursor ??
+        payloadOut.cursor ??
+        null;
+
+      state.hasMore = Boolean(
+        payloadOut.has_more
+      );
+
+      state.rankedCount = numeric(
+        payloadOut.ranked_count ??
+        payloadOut.count ??
+        state.rankedCount
+      );
+
+      state.loadedCount = numeric(
+        payloadOut.loaded_count ??
+        state.rows.length
+      );
+
+      state.bucketCounts =
+        payloadOut.bucket_counts ||
+        state.bucketCounts;
+
+      updateSpacer();
+      renderVirtualWindow();
+      updatePagingStatus();
+
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.error(
+          "Sembiotic pagination failed",
+          error
+        );
+      }
+    } finally {
+      state.loadingMore = false;
+      installLoadButton();
+    }
+  }
+
+  function absorbInitialResponse(
+    payload,
+    requestBody,
+    endpoint
+  ) {
+    const rows = responseRows(payload);
+
+    if (!rows.length) {
+      return;
+    }
+
+    state.endpoint = endpoint;
+    state.query = String(
+      payload.query ||
+      requestBody.query ||
+      requestBody.text ||
+      requestBody.q ||
+      ""
+    );
+
+    state.mode = String(
+      payload.mode ||
+      requestBody.mode ||
+      requestBody.domain ||
+      (
+        state.designActive
+          ? "design"
+          : "unified"
+      )
+    );
+
+    state.rows = [];
+    state.rowIds = new Set();
+    state.visibleCards.clear();
+    state.activeIndex = 0;
+
+    addRows(rows);
+
+    state.rankingId = String(
+      payload.ranking_id || ""
+    );
+
+    state.cursor =
+      payload.next_cursor ??
+      payload.cursor ??
+      null;
+
+    state.hasMore = Boolean(
+      payload.has_more
+    );
+
+    state.rankedCount = numeric(
+      payload.ranked_count ??
+      payload.eligible_count ??
+      payload.count ??
+      rows.length
+    );
+
+    state.fieldCount = numeric(
+      payload.field_count ??
+      state.manifest?.count ??
+      state.rankedCount
+    );
+
+    state.loadedCount = numeric(
+      payload.loaded_count ??
+      rows.length
+    );
+
+    state.bucketCounts =
+      payload.bucket_counts || {
+        all: state.rankedCount
+      };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        installDesignTab();
+
+        if (!installOverlay()) {
+          let retries = 0;
+
+          const timer = setInterval(
+            () => {
+              retries += 1;
+
+              if (
+                installOverlay() ||
+                retries >= 30
+              ) {
+                clearInterval(timer);
+              }
+            },
+            100
+          );
+        }
+
+        updatePagingStatus();
+
+        if (state.rows[0]) {
+          updateTopCounter(
+            state.rows[0]
+          );
+        }
+      });
+    });
+  }
+
+  window.fetch = async function(
+    input,
+    init = {}
+  ) {
+    const endpoint = requestUrl(input);
+
+    const isSearch =
+      endpoint.includes(
+        "/field/v1/search"
+      ) &&
+      String(
+        init.method || "GET"
+      ).toUpperCase() === "POST";
+
+    if (!isSearch) {
+      return state.nativeFetch(
+        input,
+        init
+      );
+    }
+
+    let requestBody = {};
+
+    if (
+      typeof init.body === "string"
+    ) {
+      try {
+        requestBody =
+          JSON.parse(init.body);
+      } catch (_) {}
+    }
+
+    const continuation = Boolean(
+      requestBody.cursor ||
+      requestBody.ranking_id ||
+      numeric(
+        requestBody.offset
+      ) > 0 ||
+      String(
+        init.headers?.[
+          "X-Sembiotic-Page"
+        ] || ""
+      )
+    );
+
+    if (continuation) {
+      return state.nativeFetch(
+        input,
+        init
+      );
+    }
+
+    state.generation += 1;
+    state.pageController?.abort();
+    state.initialController?.abort();
+
+    state.initialController =
+      new AbortController();
+
+    requestBody.page_size =
+      PAGE_SIZE;
+    requestBody.limit =
+      PAGE_SIZE;
+    requestBody.k =
+      PAGE_SIZE;
+    requestBody.offset = 0;
+
+    if (state.designActive) {
+      requestBody.mode = "design";
+      requestBody.domain = "design";
+      requestBody.design_field = true;
+    }
+
+    const patchedInit = {
+      ...init,
+      headers: {
+        ...(init.headers || {}),
+        "Content-Type":
+          "application/json"
+      },
+      body: JSON.stringify(
+        requestBody
+      ),
+      signal:
+        state.initialController.signal
+    };
+
+    const response =
+      await state.nativeFetch(
+        input,
+        patchedInit
+      );
+
+    if (response.ok) {
+      response
+        .clone()
+        .json()
+        .then(payload => {
+          absorbInitialResponse(
+            payload,
+            requestBody,
+            endpoint
+          );
+        })
+        .catch(() => {});
+    }
+
+    return response;
+  };
+
+  async function loadManifest() {
+    try {
+      const response =
+        await state.nativeFetch(
+          "/field/v1/manifest",
+          {
+            cache: "no-store"
+          }
+        );
+
+      if (!response.ok) {
+        return;
+      }
+
+      state.manifest =
+        await response.json();
+
+      installDesignTab();
+      updateTabCounts();
+
+    } catch (_) {}
+  }
+
+  function boot() {
+    removeBrokenDesignControls();
+    state.railHost = findRailHost();
+    installDesignTab();
+    loadManifest();
+
+    const mutationObserver =
+      new MutationObserver(() => {
+        removeBrokenDesignControls();
+        installDesignTab();
+
+        if (
+          state.rows.length &&
+          !state.overlay
+        ) {
+          installOverlay();
+        }
+      });
+
+    mutationObserver.observe(
+      document.documentElement,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+  }
+
+  if (
+    document.readyState === "loading"
+  ) {
+    document.addEventListener(
+      "DOMContentLoaded",
+      boot,
+      {
+        once: true
+      }
+    );
+  } else {
+    boot();
+  }
+})();
+</script>
+
+</body>
+</html>
