@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- SEMBIOTIC_RANKING_BUILD continuous-50-page-full-field -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sembiotic — Search Biology by Meaning</title>
@@ -173,214 +174,1796 @@ document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'&&document.activeE
 renderBuckets();clearMedia();loadMedia();loadSystem();setInterval(loadSystem,30000);$('query').focus();
 </script>
 
-<!-- SEMBIOTIC_DESIGN_FIELD_V1 -->
-<style>
-#sembioticDesignControl{
-  display:inline-flex;
-  align-items:center;
-  border:1px solid currentColor;
-  border-radius:999px;
-  background:transparent;
-  color:inherit;
-  padding:9px 14px;
-  font:500 12px/1 system-ui,sans-serif;
-  letter-spacing:.04em;
-  cursor:pointer;
-  opacity:.86;
+
+<!-- SEMBIOTIC_COMPLETE_PAGINATION_V3 -->
+<style id="sembiotic-complete-pagination-style">
+#sembioticDesignTab {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  min-width: 118px !important;
 }
-#sembioticDesignControl:hover{opacity:1}
-#sembioticDesignControl[aria-pressed="true"]{
-  background:#eef2ec;
-  color:#101310;
-  border-color:#eef2ec;
+
+#sembioticDesignTab[data-active="true"] {
+  color: #54ff78 !important;
+  background: rgba(38,255,91,.045) !important;
+  border-color: rgba(38,255,91,.24) !important;
 }
-#sembioticDesignStrip{
-  display:none;
-  width:min(900px,calc(100% - 32px));
-  margin:12px auto;
-  padding:12px 0;
-  border-top:1px solid rgba(130,150,136,.42);
-  border-bottom:1px solid rgba(130,150,136,.25);
-  font:11px/1.55 ui-monospace,monospace;
-  color:inherit;
-  opacity:.82;
+
+#sembioticDesignTab .sembiotic-tab-count,
+.sembiotic-tab-count {
+  display: inline-block !important;
+  margin-left: 7px !important;
+  opacity: .48 !important;
+  font-size: .84em !important;
 }
-#sembioticDesignStrip.open{display:block}
-#sembioticDesignStrip b{
-  font-family:system-ui,sans-serif;
-  font-size:13px;
+
+#sembioticPagedOverlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 30 !important;
+  background: #030503 !important;
+  overflow: hidden !important;
+}
+
+#sembioticPagedScroller {
+  position: absolute !important;
+  inset: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  overscroll-behavior-inline: contain !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(102,255,129,.32) transparent !important;
+  touch-action: pan-x !important;
+}
+
+#sembioticPagedSpacer {
+  position: relative !important;
+  height: 100% !important;
+  min-height: 220px !important;
+}
+
+.sembiotic-page-card {
+  position: absolute !important;
+  top: 14px !important;
+  bottom: 14px !important;
+  width: 270px !important;
+  display: grid !important;
+  grid-template-rows: minmax(92px, 52%) 1fr !important;
+  padding: 0 !important;
+  border: 1px solid rgba(142,160,146,.25) !important;
+  background: #050805 !important;
+  color: #eef2ec !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  font: inherit !important;
+}
+
+.sembiotic-page-card:hover,
+.sembiotic-page-card[data-selected="true"] {
+  border-color: rgba(72,255,107,.68) !important;
+  background: #071008 !important;
+}
+
+.sembiotic-page-image {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(42,70,47,.25),
+      rgba(4,7,4,.9)
+    ) !important;
+}
+
+.sembiotic-page-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.sembiotic-page-image::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(
+      to top,
+      rgba(2,4,2,.9),
+      transparent 72%
+    ) !important;
+  pointer-events: none !important;
+}
+
+.sembiotic-page-rank,
+.sembiotic-page-score {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 10px !important;
+  padding: 5px 7px !important;
+  background: rgba(1,4,1,.78) !important;
+  border: 1px solid rgba(180,200,183,.24) !important;
+  font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .08em !important;
+}
+
+.sembiotic-page-rank {
+  left: 10px !important;
+}
+
+.sembiotic-page-score {
+  right: 10px !important;
+  color: #56ff7a !important;
+}
+
+.sembiotic-page-copy {
+  padding: 12px 13px 14px !important;
+  min-width: 0 !important;
+}
+
+.sembiotic-page-copy strong {
+  display: block !important;
+  margin-bottom: 7px !important;
+  overflow: hidden !important;
+  font: 500 17px/1.08 Georgia, "Times New Roman", serif !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.sembiotic-page-copy small {
+  display: block !important;
+  margin-bottom: 8px !important;
+  color: rgba(235,241,235,.56) !important;
+  font: 9px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+.sembiotic-page-copy p {
+  display: -webkit-box !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  color: rgba(235,241,235,.68) !important;
+  font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 3 !important;
+}
+
+#sembioticLoadMore {
+  position: absolute !important;
+  top: 14px !important;
+  bottom: 14px !important;
+  width: 176px !important;
+  padding: 18px !important;
+  border: 1px solid rgba(72,255,107,.34) !important;
+  background: rgba(12,27,15,.6) !important;
+  color: #5cff7c !important;
+  font: 10px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .09em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+}
+
+#sembioticLoadMore:disabled {
+  cursor: default !important;
+  opacity: .5 !important;
+}
+
+#sembioticPagingStatus {
+  position: absolute !important;
+  z-index: 35 !important;
+  right: 14px !important;
+  bottom: 9px !important;
+  pointer-events: none !important;
+  color: rgba(225,235,226,.44) !important;
+  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+@media (max-width: 720px) {
+  .sembiotic-page-card {
+    width: 230px !important;
+  }
+
+  #sembioticLoadMore {
+    width: 150px !important;
+  }
+
+  #sembioticDesignTab {
+    min-width: 102px !important;
+  }
 }
 </style>
-<script>
+
+<script id="sembiotic-complete-pagination-runtime">
 (() => {
-  const sample =
-    "Rank candidate architectures for a minimal synthetic life form " +
-    "capable of maintaining a stable membrane, harvesting energy, " +
-    "regulating internal chemistry, storing and copying information, " +
-    "growing, dividing, and undergoing controlled evolution. Compare " +
-    "membrane compositions, metabolic networks, information systems, " +
-    "replication mechanisms, genetic circuits, division strategies, " +
-    "environmental requirements, failure modes, and containment systems.";
+  "use strict";
 
-  let designActive = false;
-  const originalFetch = window.fetch.bind(window);
+  const PAGE_SIZE = 50;
+  const CARD_WIDTH_DESKTOP = 270;
+  const CARD_WIDTH_MOBILE = 230;
+  const CARD_GAP = 12;
+  const BUFFER_CARDS = 10;
 
-  function inputNode(){
+  const state = {
+    nativeFetch: window.fetch.bind(window),
+    endpoint: "",
+    query: "",
+    mode: "unified",
+    designActive: false,
+    rows: [],
+    rowIds: new Set(),
+    rankedCount: 0,
+    fieldCount: 0,
+    loadedCount: 0,
+    bucketCounts: {},
+    rankingId: "",
+    cursor: null,
+    hasMore: false,
+    loadingMore: false,
+    activeIndex: 0,
+    generation: 0,
+    initialController: null,
+    pageController: null,
+    railHost: null,
+    overlay: null,
+    scroller: null,
+    spacer: null,
+    loadButton: null,
+    visibleCards: new Map(),
+    observer: null,
+    manifest: null
+  };
+
+  const normalizeText = value =>
+    String(value || "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const lowerText = value =>
+    normalizeText(value).toLowerCase();
+
+  const escapeHtml = value =>
+    String(value ?? "").replace(
+      /[&<>"']/g,
+      character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[character]
+    );
+
+  const numeric = value => {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : 0;
+  };
+
+  const formatCount = value =>
+    numeric(value).toLocaleString();
+
+  function requestUrl(input) {
+    if (typeof input === "string") {
+      return input;
+    }
+
+    return String(
+      input && input.url || ""
+    );
+  }
+
+  function searchInput() {
     return (
       document.querySelector("#query") ||
       document.querySelector("#searchInput") ||
       document.querySelector("#queryInput") ||
+      document.querySelector(
+        'textarea[placeholder*="biology" i]'
+      ) ||
       document.querySelector("textarea") ||
-      document.querySelector('input[type="search"]')
+      document.querySelector(
+        'input[type="search"]'
+      )
     );
   }
 
-  window.fetch = async function(input, init){
-    const url =
-      typeof input === "string"
-        ? input
-        : String(input && input.url || "");
+  function rowIdentifier(row, index) {
+    return String(
+      row.id ||
+      row.code ||
+      row.identifier ||
+      row.doi ||
+      row.url ||
+      [
+        row.title || row.name || "",
+        row.source || "",
+        row.rank || index
+      ].join("|")
+    );
+  }
 
-    if(
-      designActive &&
-      url.includes("/field/v1/search") &&
-      init &&
-      typeof init.body === "string"
-    ){
-      try{
-        const body = JSON.parse(init.body);
-        body.mode = "design";
-        body.domain = "design";
-        body.design_field = true;
+  function imageUrl(row) {
+    const metadata =
+      row && typeof row.metadata === "object"
+        ? row.metadata
+        : {};
 
-        init = {
-          ...init,
-          body: JSON.stringify(body)
-        };
-      }catch(_){}
+    return String(
+      row.image ||
+      row.image_url ||
+      row.media_url ||
+      row.thumbnail ||
+      row.poster ||
+      metadata.image ||
+      metadata.image_url ||
+      metadata.media_url ||
+      metadata.thumbnail ||
+      ""
+    );
+  }
+
+  function normalizeRow(row, index) {
+    const rank = numeric(
+      row.rank ||
+      state.rows.length + index + 1
+    );
+
+    return {
+      ...row,
+      id: rowIdentifier(row, index),
+      rank,
+      score: numeric(
+        row.score ??
+        row.resonance ??
+        row.coherence
+      ),
+      title: String(
+        row.title ||
+        row.name ||
+        row.label ||
+        `Biological object ${rank}`
+      ),
+      description: String(
+        row.description ||
+        row.text ||
+        row.summary ||
+        row.content ||
+        ""
+      ),
+      category: String(
+        row.category ||
+        row.object_type ||
+        row.type ||
+        "Biological object"
+      ),
+      domain: String(
+        row.domain ||
+        row.mode ||
+        "unified"
+      ),
+      source: String(
+        row.source ||
+        row.code ||
+        "Sembiotic field"
+      ),
+      image: imageUrl(row)
+    };
+  }
+
+  function responseRows(payload) {
+    if (Array.isArray(payload)) {
+      return payload;
     }
 
-    return originalFetch(input, init);
-  };
-
-  function install(){
-    if(
-      document.getElementById(
-        "sembioticDesignControl"
-      )
-    ){
-      return;
+    if (!payload || typeof payload !== "object") {
+      return [];
     }
 
-    const input = inputNode();
+    return (
+      payload.results ||
+      payload.matches ||
+      payload.items ||
+      payload.ranked ||
+      payload.top ||
+      []
+    );
+  }
 
-    if(!input){
-      return;
-    }
+  function addRows(rows) {
+    let added = 0;
 
-    const modeNode =
-      document.querySelector('[data-mode="unified"]') ||
-      document.querySelector('[data-filter="unified"]');
-
-    const host =
-      (modeNode && modeNode.parentElement) ||
-      document.querySelector(".filters") ||
-      document.querySelector(".tabs") ||
-      document.querySelector(".filter-tabs") ||
-      document.querySelector(".bucket-tabs") ||
-      document.querySelector("nav") ||
-      input.closest("form") ||
-      input.parentElement;
-
-    const button = document.createElement("button");
-    button.id = "sembioticDesignControl";
-    button.type = "button";
-    button.textContent = "Design field";
-    button.setAttribute("aria-pressed","false");
-
-    const strip = document.createElement("div");
-    strip.id = "sembioticDesignStrip";
-
-    strip.innerHTML =
-      "<b>From biological discovery to biological design.</b> " +
-      "Generate → Embed → Rank → Build → Test → Iterate. " +
-      "Meaning selects the design. " +
-      "Experiment decides whether it lives.";
-
-    button.onclick = () => {
-      designActive = !designActive;
-
-      button.setAttribute(
-        "aria-pressed",
-        String(designActive)
+    for (const rawRow of rows) {
+      const row = normalizeRow(
+        rawRow,
+        state.rows.length
       );
 
-      strip.classList.toggle(
-        "open",
-        designActive
-      );
-
-      globalThis.SEMBIOTIC_MODE =
-        designActive
-          ? "design"
-          : "unified";
-
-      try{
-        if(typeof mode !== "undefined"){
-          mode = globalThis.SEMBIOTIC_MODE;
-        }
-      }catch(_){}
-
-      if(designActive){
-        input.value = sample;
-
-        input.dispatchEvent(
-          new Event(
-            "input",
-            {bubbles:true}
-          )
-        );
-
-        input.dispatchEvent(
-          new Event(
-            "change",
-            {bubbles:true}
-          )
-        );
-
-        input.focus();
+      if (state.rowIds.has(row.id)) {
+        continue;
       }
+
+      state.rowIds.add(row.id);
+      state.rows.push(row);
+      added += 1;
+    }
+
+    return added;
+  }
+
+  function removeBrokenDesignControls() {
+    [
+      "sembioticDesignFieldControl",
+      "sembioticDesignFieldStrip",
+      "sembioticDesignControl",
+      "sembioticDesignStrip"
+    ].forEach(identifier => {
+      document
+        .getElementById(identifier)
+        ?.remove();
+    });
+
+    for (const element of document.querySelectorAll(
+      "button,a,[role='button']"
+    )) {
+      if (element.id === "sembioticDesignTab") {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        text === "design field" ||
+        text === "design fields"
+      ) {
+        element.remove();
+      }
+    }
+  }
+
+  function tabStrip() {
+    const labels = [
+      "all",
+      "cells",
+      "pathways",
+      "images",
+      "assays",
+      "papers",
+      "products",
+      "experiments",
+      "operations"
+    ];
+
+    let best = null;
+    let bestScore = 0;
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (
+        element.children.length < 5 ||
+        element.children.length > 18
+      ) {
+        continue;
+      }
+
+      const childTexts = [
+        ...element.children
+      ].map(child =>
+        lowerText(child.textContent)
+      );
+
+      const score = labels.filter(label =>
+        childTexts.some(text =>
+          text.startsWith(label)
+        )
+      ).length;
+
+      if (score > bestScore) {
+        best = element;
+        bestScore = score;
+      }
+    }
+
+    return bestScore >= 5
+      ? best
+      : null;
+  }
+
+  function setDesignActive(active) {
+    state.designActive = Boolean(active);
+
+    const tab = document.getElementById(
+      "sembioticDesignTab"
+    );
+
+    if (tab) {
+      tab.dataset.active = String(
+        state.designActive
+      );
+
+      tab.setAttribute(
+        "aria-selected",
+        String(state.designActive)
+      );
+    }
+
+    globalThis.SEMBIOTIC_MODE =
+      state.designActive
+        ? "design"
+        : "unified";
+  }
+
+  function installDesignTab() {
+    removeBrokenDesignControls();
+
+    const strip = tabStrip();
+
+    if (!strip) {
+      return;
+    }
+
+    let tab = document.getElementById(
+      "sembioticDesignTab"
+    );
+
+    if (!tab) {
+      const operations = [
+        ...strip.children
+      ].find(child =>
+        lowerText(
+          child.textContent
+        ).startsWith("operations")
+      );
+
+      tab = operations
+        ? operations.cloneNode(false)
+        : document.createElement("button");
+
+      tab.id = "sembioticDesignTab";
+
+      if (
+        tab.tagName === "BUTTON"
+      ) {
+        tab.type = "button";
+      }
+
+      tab.removeAttribute("id");
+      tab.id = "sembioticDesignTab";
+      tab.removeAttribute("data-filter");
+      tab.removeAttribute("data-mode");
+      tab.removeAttribute("data-type");
+      tab.removeAttribute("data-bucket");
+
+      tab.dataset.filter = "design";
+      tab.dataset.mode = "design";
+      tab.dataset.bucket = "design";
+
+      tab.innerHTML =
+        '<span>DESIGNS</span>' +
+        '<span class="sembiotic-tab-count">0</span>';
+
+      strip.appendChild(tab);
+
+      tab.addEventListener(
+        "click",
+        event => {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+
+          setDesignActive(true);
+
+          for (const sibling of strip.children) {
+            if (sibling !== tab) {
+              sibling.classList.remove(
+                "active",
+                "selected",
+                "is-active"
+              );
+
+              sibling.setAttribute(
+                "aria-selected",
+                "false"
+              );
+            }
+          }
+
+          tab.classList.add("active");
+          tab.setAttribute(
+            "aria-selected",
+            "true"
+          );
+
+          searchInput()?.focus();
+        },
+        true
+      );
+
+      strip.addEventListener(
+        "click",
+        event => {
+          const target = event.target.closest(
+            "button,a,[role='tab'],[data-filter],[data-mode],[data-type],[data-bucket]"
+          );
+
+          if (
+            target &&
+            target.id !== "sembioticDesignTab"
+          ) {
+            setDesignActive(false);
+          }
+        },
+        true
+      );
+    }
+
+    updateTabCounts();
+  }
+
+  function updateTabCounts() {
+    const strip = tabStrip();
+
+    if (!strip) {
+      return;
+    }
+
+    const counts = {
+      all:
+        state.bucketCounts.all ??
+        state.rankedCount,
+      cells:
+        state.bucketCounts.cells ?? 0,
+      pathways:
+        state.bucketCounts.pathways ?? 0,
+      images:
+        state.bucketCounts.images ?? 0,
+      assays:
+        state.bucketCounts.assays ?? 0,
+      papers:
+        state.bucketCounts.papers ?? 0,
+      products:
+        state.bucketCounts.products ?? 0,
+      experiments:
+        state.bucketCounts.experiments ?? 0,
+      operations:
+        state.bucketCounts.operations ?? 0,
+      designs:
+        state.bucketCounts.design ??
+        state.manifest?.design_field?.count ??
+        state.manifest?.domains?.design ??
+        0
     };
 
-    host.appendChild(button);
+    for (const child of strip.children) {
+      const text = lowerText(
+        child.textContent
+      );
 
-    const form =
-      input.closest("form") ||
-      input.parentElement;
+      const label = Object.keys(counts).find(
+        candidate =>
+          text.startsWith(candidate) ||
+          (
+            candidate === "designs" &&
+            text.startsWith("design")
+          )
+      );
 
-    form.insertAdjacentElement(
-      "afterend",
-      strip
+      if (!label) {
+        continue;
+      }
+
+      let countNode = child.querySelector(
+        ".sembiotic-tab-count"
+      );
+
+      if (!countNode) {
+        countNode =
+          document.createElement("span");
+
+        countNode.className =
+          "sembiotic-tab-count";
+
+        child.appendChild(countNode);
+      }
+
+      countNode.textContent = formatCount(
+        counts[label]
+      );
+    }
+  }
+
+  function findRailHost() {
+    const explicit = [
+      "#rail",
+      "#resultRail",
+      "#resultsRail",
+      "#rankedRail",
+      "#rankedResults",
+      "#resultsList",
+      ".ranked-rail",
+      ".result-rail",
+      ".results-rail",
+      ".rail"
+    ];
+
+    for (const selector of explicit) {
+      const element =
+        document.querySelector(selector);
+
+      if (!element) {
+        continue;
+      }
+
+      const rectangle =
+        element.getBoundingClientRect();
+
+      if (
+        rectangle.width > 300 &&
+        rectangle.height > 110
+      ) {
+        return element;
+      }
+    }
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        !text.includes(
+          "search to resolve the ranked biological field"
+        )
+      ) {
+        continue;
+      }
+
+      let parent = element;
+
+      for (let depth = 0; depth < 5; depth += 1) {
+        const rectangle =
+          parent.getBoundingClientRect();
+
+        if (
+          rectangle.width > 500 &&
+          rectangle.height > 150
+        ) {
+          return parent;
+        }
+
+        parent = parent.parentElement;
+
+        if (!parent) {
+          break;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  function cardWidth() {
+    return window.innerWidth <= 720
+      ? CARD_WIDTH_MOBILE
+      : CARD_WIDTH_DESKTOP;
+  }
+
+  function stride() {
+    return cardWidth() + CARD_GAP;
+  }
+
+  function installOverlay() {
+    if (!state.rows.length) {
+      return false;
+    }
+
+    if (!state.railHost) {
+      state.railHost = findRailHost();
+    }
+
+    if (!state.railHost) {
+      return false;
+    }
+
+    state.railHost.style.position =
+      "relative";
+
+    state.railHost.style.overflow =
+      "hidden";
+
+    let overlay = document.getElementById(
+      "sembioticPagedOverlay"
+    );
+
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "sembioticPagedOverlay";
+
+      overlay.innerHTML =
+        '<div id="sembioticPagedScroller">' +
+          '<div id="sembioticPagedSpacer"></div>' +
+        '</div>' +
+        '<div id="sembioticPagingStatus"></div>';
+
+      state.railHost.appendChild(overlay);
+    }
+
+    state.overlay = overlay;
+    state.scroller = document.getElementById(
+      "sembioticPagedScroller"
+    );
+    state.spacer = document.getElementById(
+      "sembioticPagedSpacer"
+    );
+
+    if (!state.scroller.dataset.bound) {
+      state.scroller.dataset.bound = "true";
+
+      state.scroller.addEventListener(
+        "scroll",
+        () => {
+          renderVirtualWindow();
+
+          const remaining =
+            state.scroller.scrollWidth -
+            (
+              state.scroller.scrollLeft +
+              state.scroller.clientWidth
+            );
+
+          if (
+            remaining <= 700 &&
+            state.hasMore &&
+            !state.loadingMore
+          ) {
+            loadNextPage();
+          }
+        },
+        {
+          passive: true
+        }
+      );
+
+      state.scroller.addEventListener(
+        "touchstart",
+        () => {},
+        {
+          passive: true
+        }
+      );
+
+      window.addEventListener(
+        "resize",
+        () => {
+          updateSpacer();
+          renderVirtualWindow();
+        },
+        {
+          passive: true
+        }
+      );
+    }
+
+    updateSpacer();
+    renderVirtualWindow();
+    updatePagingStatus();
+    return true;
+  }
+
+  function updateSpacer() {
+    if (!state.spacer) {
+      return;
+    }
+
+    const extra = 188;
+
+    state.spacer.style.width =
+      (
+        state.rows.length * stride() +
+        extra
+      ) + "px";
+
+    installLoadButton();
+  }
+
+  function installLoadButton() {
+    if (!state.spacer) {
+      return;
+    }
+
+    let button = document.getElementById(
+      "sembioticLoadMore"
+    );
+
+    if (!button) {
+      button = document.createElement("button");
+      button.id = "sembioticLoadMore";
+      button.type = "button";
+
+      button.addEventListener(
+        "click",
+        () => loadNextPage()
+      );
+
+      state.spacer.appendChild(button);
+    }
+
+    state.loadButton = button;
+
+    button.style.left =
+      (
+        state.rows.length * stride()
+      ) + "px";
+
+    if (state.loadingMore) {
+      button.disabled = true;
+      button.textContent =
+        `Loading ranks ` +
+        `${state.rows.length + 1}–` +
+        `${Math.min(
+          state.rows.length + PAGE_SIZE,
+          state.rankedCount
+        )}…`;
+
+    } else if (state.hasMore) {
+      button.disabled = false;
+      button.textContent =
+        `Load next ${PAGE_SIZE}\n` +
+        `${formatCount(state.rows.length)} of ` +
+        `${formatCount(state.rankedCount)} loaded`;
+
+    } else {
+      button.disabled = true;
+      button.textContent =
+        `End of ranked field\n` +
+        `${formatCount(state.rankedCount)} candidates`;
+    }
+
+    if (state.observer) {
+      state.observer.disconnect();
+    }
+
+    if (
+      "IntersectionObserver" in window &&
+      state.hasMore
+    ) {
+      state.observer =
+        new IntersectionObserver(
+          entries => {
+            if (
+              entries.some(
+                entry => entry.isIntersecting
+              ) &&
+              state.hasMore &&
+              !state.loadingMore
+            ) {
+              loadNextPage();
+            }
+          },
+          {
+            root: state.scroller,
+            rootMargin: "0px 600px 0px 0px",
+            threshold: 0.01
+          }
+        );
+
+      state.observer.observe(button);
+    }
+  }
+
+  function createCard(index) {
+    const row = state.rows[index];
+
+    if (!row) {
+      return null;
+    }
+
+    const button = document.createElement(
+      "button"
+    );
+
+    button.type = "button";
+    button.className =
+      "sembiotic-page-card";
+
+    button.dataset.index = String(index);
+    button.dataset.selected = String(
+      index === state.activeIndex
+    );
+
+    button.style.left =
+      (
+        index * stride()
+      ) + "px";
+
+    const image = row.image
+      ? (
+          '<img loading="lazy" decoding="async" ' +
+          'referrerpolicy="no-referrer" src="' +
+          escapeHtml(row.image) +
+          '" alt="">'
+        )
+      : "";
+
+    button.innerHTML =
+      '<div class="sembiotic-page-image">' +
+        image +
+        '<span class="sembiotic-page-rank">' +
+          String(row.rank).padStart(2, "0") +
+        '</span>' +
+        '<span class="sembiotic-page-score">' +
+          row.score.toFixed(3) +
+        '</span>' +
+      '</div>' +
+      '<div class="sembiotic-page-copy">' +
+        '<strong>' +
+          escapeHtml(row.title) +
+        '</strong>' +
+        '<small>' +
+          escapeHtml(row.category) +
+          " · " +
+          escapeHtml(row.source) +
+        '</small>' +
+        '<p>' +
+          escapeHtml(row.description) +
+        '</p>' +
+      '</div>';
+
+    button.addEventListener(
+      "click",
+      () => selectRow(index)
+    );
+
+    return button;
+  }
+
+  function renderVirtualWindow() {
+    if (
+      !state.scroller ||
+      !state.spacer
+    ) {
+      return;
+    }
+
+    const currentStride = stride();
+
+    const start = Math.max(
+      0,
+      Math.floor(
+        state.scroller.scrollLeft /
+        currentStride
+      ) - BUFFER_CARDS
+    );
+
+    const end = Math.min(
+      state.rows.length,
+      Math.ceil(
+        (
+          state.scroller.scrollLeft +
+          state.scroller.clientWidth
+        ) /
+        currentStride
+      ) + BUFFER_CARDS
+    );
+
+    for (
+      const [index, card]
+      of state.visibleCards
+    ) {
+      if (
+        index < start ||
+        index >= end
+      ) {
+        card.remove();
+        state.visibleCards.delete(index);
+      }
+    }
+
+    for (
+      let index = start;
+      index < end;
+      index += 1
+    ) {
+      if (
+        state.visibleCards.has(index)
+      ) {
+        const existing =
+          state.visibleCards.get(index);
+
+        existing.style.left =
+          (
+            index * currentStride
+          ) + "px";
+
+        existing.dataset.selected =
+          String(
+            index === state.activeIndex
+          );
+
+        continue;
+      }
+
+      const card = createCard(index);
+
+      if (!card) {
+        continue;
+      }
+
+      state.visibleCards.set(
+        index,
+        card
+      );
+
+      state.spacer.appendChild(card);
+    }
+  }
+
+  function candidateHeading() {
+    const selectors = [
+      "#recordTitle",
+      "#heroTitle",
+      "#resultTitle",
+      ".record-title",
+      ".hero-title",
+      ".record h1",
+      ".record h2",
+      "main h1",
+      "main h2"
+    ];
+
+    for (const selector of selectors) {
+      const element =
+        document.querySelector(selector);
+
+      if (
+        element &&
+        !lowerText(
+          element.textContent
+        ).includes("sembiotic")
+      ) {
+        return element;
+      }
+    }
+
+    return null;
+  }
+
+  function candidateDescription() {
+    const selectors = [
+      "#recordDescription",
+      "#heroDescription",
+      "#resultDescription",
+      ".record-description",
+      ".hero-description",
+      ".record p",
+      "main p"
+    ];
+
+    for (const selector of selectors) {
+      const element =
+        document.querySelector(selector);
+
+      if (element) {
+        return element;
+      }
+    }
+
+    return null;
+  }
+
+  function updateTopCounter(row) {
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = normalizeText(
+        element.textContent
+      );
+
+      if (
+        /^\d+\s*\/\s*\d+$/.test(text) ||
+        /^\d+\s*\/\s*\d+\s*$/.test(text)
+      ) {
+        element.textContent =
+          `${String(row.rank).padStart(2, "0")} / ` +
+          `${formatCount(state.rankedCount)}`;
+
+        return;
+      }
+    }
+  }
+
+  function selectRow(index) {
+    const row = state.rows[index];
+
+    if (!row) {
+      return;
+    }
+
+    state.activeIndex = index;
+    renderVirtualWindow();
+
+    const heading = candidateHeading();
+
+    if (heading) {
+      heading.textContent = row.title;
+    }
+
+    const description =
+      candidateDescription();
+
+    if (description) {
+      description.textContent =
+        row.description;
+    }
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        text.includes("resonance") &&
+        text.length < 90
+      ) {
+        element.textContent =
+          `${row.category.toUpperCase()} · ` +
+          `RESONANCE ${row.score.toFixed(3)}`;
+
+        break;
+      }
+    }
+
+    const mediaSelectors = [
+      "#heroMedia img",
+      "#recordMedia img",
+      ".media-panel img",
+      ".record-media img",
+      ".hero-media img"
+    ];
+
+    if (row.image) {
+      for (const selector of mediaSelectors) {
+        const image =
+          document.querySelector(selector);
+
+        if (!image) {
+          continue;
+        }
+
+        image.src = row.image;
+        image.alt = row.title;
+        break;
+      }
+    }
+
+    const recordLink = [
+      ...document.querySelectorAll(
+        "a,button"
+      )
+    ].find(element =>
+      lowerText(
+        element.textContent
+      ).startsWith("open record")
+    );
+
+    const recordUrl =
+      row.source_url ||
+      row.url ||
+      row.link ||
+      "";
+
+    if (
+      recordLink &&
+      recordUrl &&
+      recordLink.tagName === "A"
+    ) {
+      recordLink.href = recordUrl;
+    }
+
+    updateTopCounter(row);
+    updatePagingStatus();
+  }
+
+  function updatePagingStatus() {
+    const status = document.getElementById(
+      "sembioticPagingStatus"
+    );
+
+    if (status) {
+      status.textContent =
+        `${formatCount(state.rows.length)} loaded · ` +
+        `${formatCount(state.rankedCount)} ranked`;
+    }
+
+    updateTabCounts();
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        text === "ranked by resonance ↓" ||
+        text === "ranked by resonance" ||
+        /^ranked \d/.test(text)
+      ) {
+        element.textContent =
+          `LOADED ${formatCount(state.rows.length)} ` +
+          `OF ${formatCount(state.rankedCount)} · ` +
+          `RANKED BY RESONANCE ↓`;
+
+        break;
+      }
+    }
+
+    for (const element of document.querySelectorAll(
+      "body *"
+    )) {
+      if (element.children.length) {
+        continue;
+      }
+
+      const text = lowerText(
+        element.textContent
+      );
+
+      if (
+        /^\d+\s+returned$/.test(text) ||
+        /^\d+\s+loaded/.test(text)
+      ) {
+        element.textContent =
+          `${formatCount(state.rows.length)} loaded ` +
+          `of ${formatCount(state.rankedCount)}`;
+
+        break;
+      }
+    }
+  }
+
+  async function loadNextPage() {
+    if (
+      state.loadingMore ||
+      !state.hasMore ||
+      !state.endpoint
+    ) {
+      return;
+    }
+
+    state.loadingMore = true;
+    installLoadButton();
+
+    state.pageController?.abort();
+    state.pageController =
+      new AbortController();
+
+    const generation =
+      state.generation;
+
+    const payload = {
+      query: state.query,
+      mode: state.mode,
+      domain: state.mode,
+      ranking_id: state.rankingId,
+      cursor: state.cursor,
+      page_size: PAGE_SIZE
+    };
+
+    try {
+      let response = await state.nativeFetch(
+        state.endpoint,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+            "X-Sembiotic-Page":
+              "continuation"
+          },
+          body: JSON.stringify(payload),
+          signal:
+            state.pageController.signal
+        }
+      );
+
+      if (
+        response.status === 409 ||
+        response.status === 410
+      ) {
+        response = await state.nativeFetch(
+          state.endpoint,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+              "X-Sembiotic-Page":
+                "recovery"
+            },
+            body: JSON.stringify({
+              query: state.query,
+              mode: state.mode,
+              domain: state.mode,
+              offset: state.rows.length,
+              page_size: PAGE_SIZE
+            }),
+            signal:
+              state.pageController.signal
+          }
+        );
+      }
+
+      const payloadOut =
+        await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          payloadOut.error ||
+          `HTTP ${response.status}`
+        );
+      }
+
+      if (
+        generation !== state.generation
+      ) {
+        return;
+      }
+
+      addRows(
+        responseRows(payloadOut)
+      );
+
+      state.rankingId =
+        payloadOut.ranking_id ||
+        state.rankingId;
+
+      state.cursor =
+        payloadOut.next_cursor ??
+        payloadOut.cursor ??
+        null;
+
+      state.hasMore = Boolean(
+        payloadOut.has_more
+      );
+
+      state.rankedCount = numeric(
+        payloadOut.ranked_count ??
+        payloadOut.count ??
+        state.rankedCount
+      );
+
+      state.loadedCount = numeric(
+        payloadOut.loaded_count ??
+        state.rows.length
+      );
+
+      state.bucketCounts =
+        payloadOut.bucket_counts ||
+        state.bucketCounts;
+
+      updateSpacer();
+      renderVirtualWindow();
+      updatePagingStatus();
+
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.error(
+          "Sembiotic pagination failed",
+          error
+        );
+      }
+    } finally {
+      state.loadingMore = false;
+      installLoadButton();
+    }
+  }
+
+  function absorbInitialResponse(
+    payload,
+    requestBody,
+    endpoint
+  ) {
+    const rows = responseRows(payload);
+
+    if (!rows.length) {
+      return;
+    }
+
+    state.endpoint = endpoint;
+    state.query = String(
+      payload.query ||
+      requestBody.query ||
+      requestBody.text ||
+      requestBody.q ||
+      ""
+    );
+
+    state.mode = String(
+      payload.mode ||
+      requestBody.mode ||
+      requestBody.domain ||
+      (
+        state.designActive
+          ? "design"
+          : "unified"
+      )
+    );
+
+    state.rows = [];
+    state.rowIds = new Set();
+    state.visibleCards.clear();
+    state.activeIndex = 0;
+
+    addRows(rows);
+
+    state.rankingId = String(
+      payload.ranking_id || ""
+    );
+
+    state.cursor =
+      payload.next_cursor ??
+      payload.cursor ??
+      null;
+
+    state.hasMore = Boolean(
+      payload.has_more
+    );
+
+    state.rankedCount = numeric(
+      payload.ranked_count ??
+      payload.eligible_count ??
+      payload.count ??
+      rows.length
+    );
+
+    state.fieldCount = numeric(
+      payload.field_count ??
+      state.manifest?.count ??
+      state.rankedCount
+    );
+
+    state.loadedCount = numeric(
+      payload.loaded_count ??
+      rows.length
+    );
+
+    state.bucketCounts =
+      payload.bucket_counts || {
+        all: state.rankedCount
+      };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        installDesignTab();
+
+        if (!installOverlay()) {
+          let retries = 0;
+
+          const timer = setInterval(
+            () => {
+              retries += 1;
+
+              if (
+                installOverlay() ||
+                retries >= 30
+              ) {
+                clearInterval(timer);
+              }
+            },
+            100
+          );
+        }
+
+        updatePagingStatus();
+
+        if (state.rows[0]) {
+          updateTopCounter(
+            state.rows[0]
+          );
+        }
+      });
+    });
+  }
+
+  window.fetch = async function(
+    input,
+    init = {}
+  ) {
+    const endpoint = requestUrl(input);
+
+    const isSearch =
+      endpoint.includes(
+        "/field/v1/search"
+      ) &&
+      String(
+        init.method || "GET"
+      ).toUpperCase() === "POST";
+
+    if (!isSearch) {
+      return state.nativeFetch(
+        input,
+        init
+      );
+    }
+
+    let requestBody = {};
+
+    if (
+      typeof init.body === "string"
+    ) {
+      try {
+        requestBody =
+          JSON.parse(init.body);
+      } catch (_) {}
+    }
+
+    const continuation = Boolean(
+      requestBody.cursor ||
+      requestBody.ranking_id ||
+      numeric(
+        requestBody.offset
+      ) > 0 ||
+      String(
+        init.headers?.[
+          "X-Sembiotic-Page"
+        ] || ""
+      )
+    );
+
+    if (continuation) {
+      return state.nativeFetch(
+        input,
+        init
+      );
+    }
+
+    state.generation += 1;
+    state.pageController?.abort();
+    state.initialController?.abort();
+
+    state.initialController =
+      new AbortController();
+
+    requestBody.page_size =
+      PAGE_SIZE;
+    requestBody.limit =
+      PAGE_SIZE;
+    requestBody.k =
+      PAGE_SIZE;
+    requestBody.offset = 0;
+
+    if (state.designActive) {
+      requestBody.mode = "design";
+      requestBody.domain = "design";
+      requestBody.design_field = true;
+    }
+
+    const patchedInit = {
+      ...init,
+      headers: {
+        ...(init.headers || {}),
+        "Content-Type":
+          "application/json"
+      },
+      body: JSON.stringify(
+        requestBody
+      ),
+      signal:
+        state.initialController.signal
+    };
+
+    const response =
+      await state.nativeFetch(
+        input,
+        patchedInit
+      );
+
+    if (response.ok) {
+      response
+        .clone()
+        .json()
+        .then(payload => {
+          absorbInitialResponse(
+            payload,
+            requestBody,
+            endpoint
+          );
+        })
+        .catch(() => {});
+    }
+
+    return response;
+  };
+
+  async function loadManifest() {
+    try {
+      const response =
+        await state.nativeFetch(
+          "/field/v1/manifest",
+          {
+            cache: "no-store"
+          }
+        );
+
+      if (!response.ok) {
+        return;
+      }
+
+      state.manifest =
+        await response.json();
+
+      installDesignTab();
+      updateTabCounts();
+
+    } catch (_) {}
+  }
+
+  function boot() {
+    removeBrokenDesignControls();
+    state.railHost = findRailHost();
+    installDesignTab();
+    loadManifest();
+
+    const mutationObserver =
+      new MutationObserver(() => {
+        removeBrokenDesignControls();
+        installDesignTab();
+
+        if (
+          state.rows.length &&
+          !state.overlay
+        ) {
+          installOverlay();
+        }
+      });
+
+    mutationObserver.observe(
+      document.documentElement,
+      {
+        childList: true,
+        subtree: true
+      }
     );
   }
 
-  if(document.readyState === "loading"){
+  if (
+    document.readyState === "loading"
+  ) {
     document.addEventListener(
       "DOMContentLoaded",
-      install,
-      {once:true}
+      boot,
+      {
+        once: true
+      }
     );
-  }else{
-    install();
+  } else {
+    boot();
   }
-
-  new MutationObserver(install).observe(
-    document.documentElement,
-    {
-      childList:true,
-      subtree:true
-    }
-  );
 })();
 </script>
 
