@@ -38,3 +38,11 @@ The public site and field API are served by the same local runtime through the d
 ```
 
 The deploy command validates the HTML and JavaScript, commits to `ziolndr/sembiotic`, restarts the persistent field service, and verifies the public hostname.
+
+RANKED MEDIA FIELD UPDATE
+- Full-bleed selected result stage
+- Horizontal ranked result image rail
+- Real source imagery and credited microscopy fallback catalog
+- Category buckets and keyboard navigation
+- Functional open/share/cite/save/export controls
+- Same-origin local and production field APIs

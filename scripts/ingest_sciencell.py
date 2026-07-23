@@ -69,6 +69,16 @@ def parse_page(url,raw):
     for pat in (r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)',r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\']([^"\']+)'):
         m=re.search(pat,text,re.I)
         if m:desc=html.unescape(m.group(1)).strip();break
+    image_url=''
+    for pat in (
+        r'<meta[^>]+property=["\']og:image(?::secure_url)?["\'][^>]+content=["\']([^"\']+)',
+        r'<meta[^>]+name=["\']twitter:image(?::src)?["\'][^>]+content=["\']([^"\']+)',
+        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image(?::secure_url)?["\']'
+    ):
+        m=re.search(pat,text,re.I)
+        if m:
+            image_url=urllib.parse.urljoin(url,html.unescape(m.group(1)).strip())
+            break
     body=' '.join(parser.parts)
     body=re.sub(r'\s+',' ',html.unescape(body)).strip()
     if len(body)>6000:body=body[:6000]
@@ -82,9 +92,16 @@ def parse_page(url,raw):
     combined=' '.join(x for x in (clean_title,desc,body) if x)
     if len(combined)<120:return None
     rid='sciencell:'+hashlib.sha1(url.encode()).hexdigest()[:18]
-    return {'id':rid,'code':catno or rid.split(':')[1][:10].upper(),'title':clean_title,'name':clean_title,'text':combined,
-            'object_type':category,'category':category,'domain':'experiment','mode':'experiment','source':'ScienCell public catalog','source_url':url,
-            'tenant':'public','tags':['ScienCell','catalog']+([catno] if catno else []),'metadata':{'catalog_number':catno,'crawled_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}}
+    row={'id':rid,'code':catno or rid.split(':')[1][:10].upper(),'title':clean_title,'name':clean_title,'text':combined,
+         'object_type':category,'category':category,'domain':'experiment','mode':'experiment','source':'ScienCell public catalog','source_url':url,
+         'tenant':'public','tags':['ScienCell','catalog']+([catno] if catno else []),
+         'metadata':{'catalog_number':catno,'crawled_at':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}}
+    if image_url:
+        row['image_url']=image_url
+        row['metadata']['image_url']=image_url
+        row['metadata']['image_credit']='ScienCell public catalog page'
+        row['metadata']['image_license']='Source page terms'
+    return row
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--base',default='https://sciencellonline.com');ap.add_argument('--output',default='corpus/sciencell_public.jsonl')

@@ -40,3 +40,17 @@ The public site and field API are served by the same local runtime through the d
 ```
 
 The deploy command validates the HTML and JavaScript, commits to `ziolndr/sembiotic`, restarts the persistent field service, and verifies the public hostname.
+
+## Ranked media field interface
+
+The production interface now uses the SUMMON-style field stage:
+
+- the selected ranked object controls the full-bleed background, title, metadata, score, and record actions;
+- the bottom rail displays the ranked field as image tiles;
+- category buckets filter the same result set without rerunning ARBITER;
+- arrow keys and tile selection move laterally through the field;
+- record images are preferred, followed by source-page images and then the credited real microscopy catalog;
+- `Open record`, `Share`, `Cite`, `Save`, and `Export` are functional;
+- no fabricated result images or fabricated fallback rankings are rendered.
+
+The server exposes `GET /field/v1/media-manifest` and hydrates every search result with `image_url`, `image_candidates`, `image_source`, `image_credit`, `image_license`, `image_page`, and `canonical_record_url`.
