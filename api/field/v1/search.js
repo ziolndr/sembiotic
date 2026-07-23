@@ -6,8 +6,8 @@ module.exports = function handler(req, res) {
   return proxyJson(
     req,
     res,
-    "/field/v1/media-manifest",
-    ["GET", "HEAD"],
-    20000
+    "/field/v1/search",
+    ["POST"],
+    55000
   );
 };

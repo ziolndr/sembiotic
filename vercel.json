@@ -11,10 +11,10 @@
     "api/field/v1/manifest.js": {
       "maxDuration": 30
     },
-    "api/field/v1/health.js": {
+    "api/field/v1/media-manifest.js": {
       "maxDuration": 30
     },
-    "api/field/v1/media-manifest.js": {
+    "api/field/v1/health.js": {
       "maxDuration": 30
     }
   },
@@ -28,12 +28,12 @@
       "destination": "/api/field/v1/manifest"
     },
     {
-      "source": "/field/v1/health",
-      "destination": "/api/field/v1/health"
-    },
-    {
       "source": "/field/v1/media-manifest",
       "destination": "/api/field/v1/media-manifest"
+    },
+    {
+      "source": "/field/v1/health",
+      "destination": "/api/field/v1/health"
     }
   ],
   "headers": [

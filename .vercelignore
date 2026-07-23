@@ -1,0 +1,11 @@
+.git
+.github
+venv
+.venv
+logs
+backups
+/field/
+/corpus/
+/snapshots/
+*.command
+README*
