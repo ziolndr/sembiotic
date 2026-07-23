@@ -1,0 +1,6 @@
+.vercel
+.env*
+field_expansion/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
