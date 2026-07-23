@@ -1,52 +1,40 @@
-ARBITER BIOLOGY — LOCAL FIELD PACKAGE
-=====================================
+# Sembiotic
 
-WHAT CHANGED
-The browser no longer sends the full candidate array to /v1/compare on every search.
-The corpus is embedded once through the local ARBITER endpoint and stored as a persistent
-normalized 72D field. A query embeds once, scans the local vector matrix, and returns ranked
-biological objects with metadata.
+**The biological meaning platform. Runs on ARBITER.**
 
-PACKAGE CONTENTS
-- public/index.html                     Field-backed ARBITER Biology interface
-- corpus/base_actions.jsonl             168 curated objects from the original demo
-- corpus/structured_seed.jsonl          12,000 labeled structured seed objects
-- scripts/build_field.py                Resumable local /v1/embed field builder
-- scripts/serve_field.py                Local search/manifest/frontend server
-- scripts/ingest_sciencell.py            Public ScienCell catalog crawler
-- scripts/import_jsonl.py                Import CSV, JSON, or JSONL private datasets
-- INSTALL_AND_RUN.command               Build once, start field, open demo
-- EXPAND_SCIENCELL_CATALOG.command       Crawl real public catalog pages and rebuild
-- INSTALL_AUTOSTART.command             Keep the local field server alive through launchd
+Sembiotic encodes biological objects once into a persistent 72-dimensional field, embeds only the incoming query, and ranks the complete field by deterministic coherence.
 
-FIRST RUN
-1. Make sure local ARBITER is running at http://127.0.0.1:8000/v1/embed
-2. Double-click INSTALL_AND_RUN.command
-3. The browser opens at http://127.0.0.1:8799
+## Product identity
 
-FIELD ENDPOINTS
-GET  /field/v1/manifest
-GET  /field/v1/health
-POST /field/v1/search
-     {"query":"...","mode":"omics","limit":42}
+- **Sembiotic** is the platform.
+- **ARBITER** is the deterministic measurement engine.
+- **72D frozen geometry** is the technical layer.
+- Instrument Sans carries the editorial identity; Fragment Mono carries field metadata and system state.
+- The homepage uses an original biological-field gallery rather than stock photography or synthetic AI imagery.
 
-ADDING REAL DATA
-Place normalized .jsonl files in corpus/ and run REBUILD_FIELD.command.
-Each row should contain at minimum title and text. Useful optional fields:
-id, code, category, domain, source, source_url, tenant, tags, metadata.
+## Platform layers
 
-Generic import example:
-python3 scripts/import_jsonl.py my_data.csv \
-  --output corpus/illumina_private.jsonl \
-  --source "Illumina private workspace" \
-  --domain omics \
-  --title-field sample_name \
-  --text-field interpretation_text \
-  --category-field assay_type
+- Experiment systems and catalog resolution
+- GeneQuery interpretation
+- Omics and molecular state
+- Imaging and phenomics
+- 72D biological asset retrieval
+- Translational evidence and profile-to-model matching
+- Laboratory operations, quality, cold chain, and CAPA
+- Platform, portfolio, partnership, and licensing decisions
 
-IMPORTANT DATA LABEL
-structured_seed.jsonl is deliberately marked as generated_seed. It exercises scale and domain
-coverage; it is not represented as a real ScienCell catalog or as patient evidence. Run the
-ScienCell crawler and import validated private/public datasets to replace scale with real data.
-Raw microscopy, omics, and laboratory files remain in archival storage; this field stores their
-searchable semantic/operational representations and metadata, not reversible image compression.
+## Local runtime
+
+- Field server: `http://127.0.0.1:8799`
+- Query embedding: `http://127.0.0.1:8000/v1/embed`
+- Production hostname: `https://sembiotic.actualgeneralintelligence.com`
+
+The public site and field API are served by the same local runtime through the dedicated Cloudflare tunnel.
+
+## Deploy
+
+```zsh
+./DEPLOY_SEMBIOTIC.command
+```
+
+The deploy command validates the HTML and JavaScript, commits to `ziolndr/sembiotic`, restarts the persistent field service, and verifies the public hostname.

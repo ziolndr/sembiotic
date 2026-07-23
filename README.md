@@ -1,19 +1,27 @@
 # Sembiotic
 
-**The biological meaning platform. Powered by ARBITER.**
+**The biological meaning platform. Runs on ARBITER.**
 
 Sembiotic encodes biological objects once into a persistent 72-dimensional field, embeds only the incoming query, and ranks the complete field by deterministic coherence.
 
+## Product identity
+
+- **Sembiotic** is the platform.
+- **ARBITER** is the deterministic measurement engine.
+- **72D frozen geometry** is the technical layer.
+- Instrument Sans carries the editorial identity; Fragment Mono carries field metadata and system state.
+- The homepage uses an original biological-field gallery rather than stock photography or synthetic AI imagery.
+
 ## Platform layers
 
+- Experiment systems and catalog resolution
+- GeneQuery interpretation
 - Omics and molecular state
 - Imaging and phenomics
-- Cell systems and models
-- Pathways, perturbations, assays, and controls
-- Experiment design and GeneQuery interpretation
+- 72D biological asset retrieval
 - Translational evidence and profile-to-model matching
 - Laboratory operations, quality, cold chain, and CAPA
-- Private enterprise fields, APIs, and biological data products
+- Platform, portfolio, partnership, and licensing decisions
 
 ## Local runtime
 
@@ -22,3 +30,11 @@ Sembiotic encodes biological objects once into a persistent 72-dimensional field
 - Production hostname: `https://sembiotic.actualgeneralintelligence.com`
 
 The public site and field API are served by the same local runtime through the dedicated Cloudflare tunnel.
+
+## Deploy
+
+```zsh
+./DEPLOY_SEMBIOTIC.command
+```
+
+The deploy command validates the HTML and JavaScript, commits to `ziolndr/sembiotic`, restarts the persistent field service, and verifies the public hostname.
