@@ -1,0 +1,54 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "sh scripts/build.sh",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "functions": {
+    "api/field/v1/search.js": {
+      "maxDuration": 60
+    },
+    "api/field/v1/manifest.js": {
+      "maxDuration": 30
+    },
+    "api/field/v1/health.js": {
+      "maxDuration": 30
+    },
+    "api/field/v1/media-manifest.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/field/v1/search",
+      "destination": "/api/field/v1/search"
+    },
+    {
+      "source": "/field/v1/manifest",
+      "destination": "/api/field/v1/manifest"
+    },
+    {
+      "source": "/field/v1/health",
+      "destination": "/api/field/v1/health"
+    },
+    {
+      "source": "/field/v1/media-manifest",
+      "destination": "/api/field/v1/media-manifest"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}
