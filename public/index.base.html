@@ -428,6 +428,180 @@ video.sembiotic-hero-media {
 
 </style>
 <!-- /SEMBIOTIC_LAYOUT_REFINEMENT_V1_STYLE -->
+
+
+
+<!-- SEMBIOTIC_VIEWPORT_LOCK_V1_STYLE -->
+<style id="sembiotic-viewport-lock-v1">
+
+html {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none !important;
+}
+
+body {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none !important;
+}
+
+body.sembiotic-root-x-locked {
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+}
+
+/*
+The complete result screen must remain bounded by the viewport.
+Only its internal ranked rail may exceed that width.
+*/
+#results,
+.results,
+[data-sembiotic-result-shell="true"] {
+  left: 0 !important;
+  right: 0 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-x: none !important;
+  contain: layout paint !important;
+}
+
+#results > *,
+.results > *,
+[data-sembiotic-result-shell="true"] > * {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.results-inner,
+.result-inner,
+.result-main,
+.result-stage,
+.record-stage,
+.record-shell,
+.hero-shell,
+.hero-grid,
+.result-hero,
+.results-nav,
+.result-nav,
+.results-header,
+.result-header,
+.sembiotic-record-hero,
+.sembiotic-header-row,
+.sembiotic-tabs-row,
+.sembiotic-status-row {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  overflow-x: hidden !important;
+}
+
+/*
+This is the sole horizontal scrolling surface.
+Its intrinsic card width is isolated from the document.
+*/
+[data-sembiotic-xrail="true"],
+.sembiotic-results-rail {
+  position: relative !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  overscroll-behavior-x: contain !important;
+  overscroll-behavior-y: none !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  contain: inline-size layout paint !important;
+  scroll-snap-type: x proximity;
+}
+
+[data-sembiotic-xrail="true"]::-webkit-scrollbar,
+.sembiotic-results-rail::-webkit-scrollbar {
+  display: none;
+}
+
+[data-sembiotic-xrail="true"] > *,
+.sembiotic-results-rail > * {
+  flex-shrink: 0 !important;
+}
+
+/*
+Long search text and headings may shrink or truncate,
+but may never establish document width.
+*/
+input,
+textarea,
+[contenteditable="true"],
+.result-query,
+.record-query,
+.query-display,
+.sembiotic-query-display,
+.sembiotic-query-shell,
+.sembiotic-query-control {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+}
+
+input,
+.result-query,
+.record-query,
+.query-display,
+.sembiotic-query-display {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+@media (max-width: 760px) {
+  html,
+  body,
+  #results,
+  .results,
+  [data-sembiotic-result-shell="true"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  [data-sembiotic-xrail="true"],
+  .sembiotic-results-rail {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    scroll-padding-left: 12px;
+    scroll-snap-type: x mandatory;
+  }
+
+  [data-sembiotic-xrail="true"] > *,
+  .sembiotic-results-rail > * {
+    scroll-snap-align: start;
+  }
+}
+
+</style>
+<!-- /SEMBIOTIC_VIEWPORT_LOCK_V1_STYLE -->
 </head>
 <body>
 <main class="app">
@@ -1207,5 +1381,359 @@ renderBuckets();clearMedia();loadMedia();loadSystem();setInterval(loadSystem,300
 
 </script>
 <!-- /SEMBIOTIC_LAYOUT_REFINEMENT_V1_SCRIPT -->
+
+
+
+<!-- SEMBIOTIC_VIEWPORT_LOCK_V1_SCRIPT -->
+<script id="sembiotic-viewport-lock-runtime-v1">
+
+(() => {
+  const root =
+    document.scrollingElement ||
+    document.documentElement;
+
+  let scheduled = false;
+  let correcting = false;
+
+  const visible = element => {
+    if (!(element instanceof Element)) {
+      return false;
+    }
+
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+
+    return (
+      style.display !== 'none' &&
+      style.visibility !== 'hidden' &&
+      rect.width > 0 &&
+      rect.height > 0
+    );
+  };
+
+  const lockDocumentX = () => {
+    if (correcting) {
+      return;
+    }
+
+    const rootX =
+      Number(root?.scrollLeft || 0);
+
+    const bodyX =
+      Number(document.body?.scrollLeft || 0);
+
+    if (
+      Math.abs(rootX) < 0.5 &&
+      Math.abs(bodyX) < 0.5
+    ) {
+      return;
+    }
+
+    correcting = true;
+
+    const y =
+      window.scrollY ||
+      root?.scrollTop ||
+      document.body?.scrollTop ||
+      0;
+
+    if (root) {
+      root.scrollLeft = 0;
+    }
+
+    if (document.documentElement) {
+      document.documentElement.scrollLeft = 0;
+    }
+
+    if (document.body) {
+      document.body.scrollLeft = 0;
+    }
+
+    window.scrollTo(0, y);
+
+    requestAnimationFrame(() => {
+      correcting = false;
+    });
+  };
+
+  const identifyResultShell = () => {
+    const explicit =
+      document.querySelector(
+        '#results,.results'
+      );
+
+    if (explicit) {
+      explicit.dataset.sembioticResultShell =
+        'true';
+    }
+  };
+
+  const railScore = element => {
+    if (!visible(element)) {
+      return -Infinity;
+    }
+
+    const rect =
+      element.getBoundingClientRect();
+
+    const overflow =
+      element.scrollWidth -
+      element.clientWidth;
+
+    if (overflow < 40) {
+      return -Infinity;
+    }
+
+    const children =
+      Array.from(element.children)
+        .filter(visible);
+
+    if (children.length < 3) {
+      return -Infinity;
+    }
+
+    const cardLike = children.filter(child => {
+      const childRect =
+        child.getBoundingClientRect();
+
+      return (
+        childRect.width >= 120 &&
+        childRect.width <= 460 &&
+        childRect.height >= 100
+      );
+    }).length;
+
+    if (cardLike < 3) {
+      return -Infinity;
+    }
+
+    const lowerPageBonus =
+      rect.top >
+      window.innerHeight * 0.35
+        ? 5000
+        : 0;
+
+    return (
+      lowerPageBonus +
+      overflow +
+      cardLike * 1000 +
+      rect.width
+    );
+  };
+
+  const identifyRail = () => {
+    const selectors = [
+      '.sembiotic-results-rail',
+      '[data-sembiotic-xrail="true"]',
+      '#rankList',
+      '#resultsRail',
+      '#resultRail',
+      '.results-rail',
+      '.result-rail',
+      '.rank-list',
+      '.ranked-list',
+      '.result-track',
+      '.results-track',
+      '.card-track',
+      '.cards',
+      '.deck',
+      '[class*="rail"]',
+      '[class*="track"]',
+      '[class*="deck"]'
+    ];
+
+    const candidates =
+      Array.from(
+        document.querySelectorAll(
+          selectors.join(',')
+        )
+      );
+
+    const unique =
+      Array.from(new Set(candidates));
+
+    unique.sort(
+      (left, right) =>
+        railScore(right) -
+        railScore(left)
+    );
+
+    const rail =
+      unique.find(
+        element =>
+          Number.isFinite(
+            railScore(element)
+          )
+      );
+
+    if (!rail) {
+      return null;
+    }
+
+    document
+      .querySelectorAll(
+        '[data-sembiotic-xrail="true"]'
+      )
+      .forEach(element => {
+        if (element !== rail) {
+          delete element.dataset
+            .sembioticXrail;
+        }
+      });
+
+    rail.dataset.sembioticXrail =
+      'true';
+
+    rail.classList.add(
+      'sembiotic-results-rail'
+    );
+
+    let parent =
+      rail.parentElement;
+
+    for (
+      let depth = 0;
+      parent &&
+      parent !== document.body &&
+      depth < 4;
+      depth += 1,
+      parent = parent.parentElement
+    ) {
+      parent.style.minWidth = '0';
+      parent.style.maxWidth = '100%';
+      parent.style.overflowX = 'hidden';
+    }
+
+    return rail;
+  };
+
+  const annotate = () => {
+    document.body?.classList.add(
+      'sembiotic-root-x-locked'
+    );
+
+    identifyResultShell();
+    identifyRail();
+    lockDocumentX();
+  };
+
+  const schedule = () => {
+    if (scheduled) {
+      return;
+    }
+
+    scheduled = true;
+
+    requestAnimationFrame(() => {
+      scheduled = false;
+      annotate();
+    });
+  };
+
+  window.addEventListener(
+    'scroll',
+    lockDocumentX,
+    {
+      passive: true,
+      capture: true
+    }
+  );
+
+  window.addEventListener(
+    'resize',
+    schedule,
+    {
+      passive: true
+    }
+  );
+
+  /*
+  On a Mac trackpad, horizontal wheel momentum can bubble
+  out of an internal scroller and move the document.
+  Redirect the movement into the ranked rail explicitly.
+  */
+  document.addEventListener(
+    'wheel',
+    event => {
+      const horizontal =
+        Math.abs(event.deltaX);
+
+      const vertical =
+        Math.abs(event.deltaY);
+
+      if (
+        horizontal < 0.5 ||
+        horizontal <= vertical
+      ) {
+        return;
+      }
+
+      const rail =
+        event.target instanceof Element
+          ? event.target.closest(
+              '[data-sembiotic-xrail="true"]'
+            )
+          : null;
+
+      event.preventDefault();
+
+      if (
+        rail &&
+        rail.scrollWidth >
+          rail.clientWidth
+      ) {
+        rail.scrollLeft +=
+          event.deltaX;
+      }
+
+      lockDocumentX();
+    },
+    {
+      passive: false,
+      capture: true
+    }
+  );
+
+  document.addEventListener(
+    'touchend',
+    lockDocumentX,
+    {
+      passive: true,
+      capture: true
+    }
+  );
+
+  const observer =
+    new MutationObserver(schedule);
+
+  observer.observe(
+    document.documentElement,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
+
+  if (
+    document.readyState === 'loading'
+  ) {
+    document.addEventListener(
+      'DOMContentLoaded',
+      schedule,
+      {
+        once: true
+      }
+    );
+  } else {
+    schedule();
+  }
+
+  setTimeout(schedule, 250);
+  setTimeout(schedule, 900);
+  setTimeout(schedule, 1800);
+})();
+
+</script>
+<!-- /SEMBIOTIC_VIEWPORT_LOCK_V1_SCRIPT -->
 </body>
 </html>
