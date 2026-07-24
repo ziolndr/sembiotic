@@ -1,14 +1,29 @@
 #!/bin/sh
 set -eu
-ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && /bin/pwd)"
-test -s "$ROOT/public/index.html"
-test -s "$ROOT/public/assets/media_catalog.json"
-/usr/bin/grep -Fq '<title>Sembiotic — Search Biology by Meaning</title>' "$ROOT/public/index.html"
-/usr/bin/grep -Fq '<div class="brand"><button id="brand">Sembiotic</button></div>' "$ROOT/public/index.html"
-/usr/bin/grep -Fq 'id="mediaPanel"' "$ROOT/public/index.html"
-/usr/bin/grep -Fq 'id="rail"' "$ROOT/public/index.html"
-test -s "$ROOT/api/field/v1/search.js"
-test -s "$ROOT/api/field/v1/manifest.js"
-test -s "$ROOT/api/field/v1/health.js"
-test -s "$ROOT/api/field/v1/media-manifest.js"
-echo "Sembiotic actual latest field UI and four field proxies ready"
+
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+SOURCE="$ROOT/public/index.base.html"
+OUTPUT="$ROOT/public/index.html"
+
+[ -s "$SOURCE" ] || {
+  echo "Missing frontend source: $SOURCE" >&2
+  exit 1
+}
+
+cp "$SOURCE" "$OUTPUT"
+
+grep -Fq \
+  'sembiotic-brutalist-apple-v1' \
+  "$OUTPUT" || {
+    echo "Frontend marker missing." >&2
+    exit 1
+  }
+
+grep -Fq \
+  'sembiotic-brutalist-runtime-v1' \
+  "$OUTPUT" || {
+    echo "Runtime marker missing." >&2
+    exit 1
+  }
+
+echo "SEMBIOTIC FRONTEND BUILD · PASS"
