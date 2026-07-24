@@ -1,0 +1,31 @@
+{
+  "id": "tnseq:s-pneumoniae-daptomycin:ftsH-SP0013",
+  "title": "FtsH (SP0013) — membrane-anchored protease dependency under daptomycin stress",
+  "name": "FtsH (SP0013) — membrane-anchored protease dependency under daptomycin stress",
+  "text": "Study-derived functional-genomics record from comparative transposon insertion sequencing in Streptococcus pneumoniae strain backgrounds T4 and 19F under daptomycin stress. FtsH, locus SP0013, is a membrane-anchored ATP-dependent protease involved in removing aberrant membrane proteins and controlling membrane turnover. Its placement in the Tn-seq daptomycin-sensitivity network supports a conditionally important membrane-protein quality-control role during antibiotic-induced membrane destabilization. This record represents conditional fitness evidence and does not claim universal baseline essentiality.",
+  "description": "A membrane-anchored protease linked by comparative Tn-seq to membrane-protein stability, membrane turnover and antibiotic-stress fitness.",
+  "category": "Tn-seq membrane essentiality",
+  "object_type": "study-derived protein target",
+  "core_category": "functional_protein_domains",
+  "core_category_label": "Functional Protein Domains & Structural Homologs",
+  "domain": "papers",
+  "sembiotic_domain": "papers",
+  "source": "PLOS Pathogens",
+  "source_collection": "direct_tnseq_study",
+  "source_url": "https://doi.org/10.1371/journal.ppat.1005869",
+  "doi": "10.1371/journal.ppat.1005869",
+  "bioproject": "PRJNA318012",
+  "organism": "Streptococcus pneumoniae",
+  "strain_backgrounds": ["T4", "19F"],
+  "gene": "ftsH",
+  "locus_tag": "SP0013",
+  "protein_class": "membrane-anchored ATP-dependent protease",
+  "evidence_type": [
+    "Tn-seq",
+    "comparative strain fitness",
+    "membrane-stress network"
+  ],
+  "condition": "daptomycin exposure",
+  "essentiality_scope": "conditionally important under the assayed stress context",
+  "provenance": "van Opijnen, Dedrick and Bento, PLOS Pathogens 2016"
+}
